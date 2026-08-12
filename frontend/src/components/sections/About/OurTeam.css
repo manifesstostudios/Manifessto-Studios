@@ -128,6 +128,7 @@
     width 0.45s ease;
 }
 
+
 .our-team-intro:hover
 .our-team-line {
   width: 80px;
@@ -208,9 +209,11 @@
   -webkit-overflow-scrolling: touch;
 }
 
+
 .our-team-slider::-webkit-scrollbar {
   display: none;
 }
+
 
 .our-team-slider.is-dragging {
   cursor: grabbing;
@@ -500,7 +503,7 @@
 
 
 /* =========================================================
-   SOCIAL
+   SOCIAL LINKS
 ========================================================= */
 
 .public-team-card-social {
@@ -508,10 +511,17 @@
 
   align-items: center;
 
+  flex-wrap: wrap;
+
   gap: 15px;
 
   margin-top: 20px;
 }
+
+
+/* =========================================================
+   SOCIAL ICON
+========================================================= */
 
 .public-team-card-social a {
   width: 27px;
@@ -524,6 +534,8 @@
 
   justify-content: center;
 
+  box-sizing: border-box;
+
   color: #ffffff;
 
   font-family:
@@ -534,15 +546,27 @@
 
   font-weight: 600;
 
+  line-height: 1;
+
+  text-align: center;
+
   text-decoration: none;
 
   border-radius: 50%;
+
+  background:
+    transparent;
 
   transition:
     color 0.3s ease,
     background 0.3s ease,
     transform 0.3s ease;
 }
+
+
+/* =========================================================
+   SOCIAL HOVER
+========================================================= */
 
 .public-team-card-social a:hover {
   color: #ffffff;
@@ -605,6 +629,7 @@
     transform 0.3s ease;
 }
 
+
 .team-more-button:hover {
   background: #1683f7;
 
@@ -613,6 +638,11 @@
   transform:
     translateX(3px);
 }
+
+
+/* =========================================================
+   MORE LABEL
+========================================================= */
 
 .team-more-label {
   font-family:
@@ -625,6 +655,11 @@
 
   letter-spacing: 1px;
 }
+
+
+/* =========================================================
+   MORE ARROW
+========================================================= */
 
 .team-more-arrow {
   font-size: 18px;
@@ -665,6 +700,7 @@
   text-transform: uppercase;
 }
 
+
 .team-scroll-hint-line {
   width: 55px;
 
@@ -686,9 +722,11 @@
       68%;
   }
 
+
   .our-team-intro {
     padding-right: 30px;
   }
+
 
   .public-team-card {
     flex:
@@ -718,6 +756,7 @@
       80px;
   }
 
+
   .our-team-intro {
     width: 100%;
 
@@ -728,13 +767,16 @@
     margin-bottom: 45px;
   }
 
+
   .our-team-description {
     max-width: 420px;
   }
 
+
   .our-team-slider-area {
     width: 100%;
   }
+
 
   .our-team-slider {
     gap: 18px;
@@ -745,6 +787,7 @@
       25px
       5vw;
   }
+
 
   .public-team-card {
     flex:
@@ -758,9 +801,11 @@
       calc(100vw - 65px);
   }
 
+
   .public-team-card-image-wrapper {
     aspect-ratio: 4 / 5;
   }
+
 
   .public-team-card-content {
     padding:
@@ -769,19 +814,39 @@
       22px;
   }
 
+
   .public-team-card-content h3 {
     font-size: 17px;
   }
 
+
   .public-team-card-role {
     font-size: 8px;
   }
+
 
   .public-team-card-description {
     font-size: 14px;
 
     line-height: 1.55;
   }
+
+
+  .public-team-card-social {
+    gap: 13px;
+
+    margin-top: 18px;
+  }
+
+
+  .public-team-card-social a {
+    width: 26px;
+
+    height: 26px;
+
+    font-size: 14px;
+  }
+
 
   .team-more-button {
     width: 54px;
@@ -793,13 +858,16 @@
     top: 43%;
   }
 
+
   .team-more-label {
     font-size: 6px;
   }
 
+
   .team-more-arrow {
     font-size: 16px;
   }
+
 
   .team-scroll-hint {
     left: 16px;
@@ -808,6 +876,7 @@
 
     font-size: 6px;
   }
+
 }
 
 
@@ -826,19 +895,23 @@
     padding-right: 14px;
   }
 
+
   .our-team-intro h2 {
     font-size: 31px;
   }
 
+
   .our-team-description {
     font-size: 14px;
   }
+
 
   .our-team-slider {
     padding-left: 14px;
 
     padding-right: 60px;
   }
+
 
   .public-team-card {
     flex:
@@ -852,6 +925,7 @@
       calc(100vw - 55px);
   }
 
+
   .public-team-card-content {
     padding:
       19px
@@ -859,9 +933,27 @@
       21px;
   }
 
+
   .public-team-card-content h3 {
     font-size: 16px;
   }
+
+
+  .public-team-card-social {
+    gap: 11px;
+
+    margin-top: 17px;
+  }
+
+
+  .public-team-card-social a {
+    width: 25px;
+
+    height: 25px;
+
+    font-size: 13px;
+  }
+
 
   .team-more-button {
     width: 48px;
@@ -870,6 +962,7 @@
 
     right: 7px;
   }
+
 }
 
 
@@ -885,10 +978,12 @@
     scroll-behavior: auto;
   }
 
+
   .public-team-card,
   .public-team-card-image,
   .team-more-button,
   .public-team-card-social a {
     transition: none;
   }
+
 }

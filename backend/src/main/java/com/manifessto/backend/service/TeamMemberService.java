@@ -16,7 +16,9 @@ public class TeamMemberService {
     public TeamMemberService(
             TeamMemberRepository teamMemberRepository
     ) {
-        this.teamMemberRepository = teamMemberRepository;
+
+        this.teamMemberRepository =
+                teamMemberRepository;
     }
 
 
@@ -35,7 +37,9 @@ public class TeamMemberService {
     // GET TEAM MEMBER BY ID
     // =====================================================
 
-    public TeamMember getTeamMemberById(Long id) {
+    public TeamMember getTeamMemberById(
+            Long id
+    ) {
 
         return teamMemberRepository
                 .findById(id)
@@ -81,25 +85,42 @@ public class TeamMemberService {
                 updatedTeamMember.getName()
         );
 
+
         existingTeamMember.setRole(
                 updatedTeamMember.getRole()
         );
+
 
         existingTeamMember.setDescription(
                 updatedTeamMember.getDescription()
         );
 
+
         existingTeamMember.setImageUrl(
                 updatedTeamMember.getImageUrl()
         );
 
+
+        /*
+         * Keep old fields for backward compatibility.
+         */
         existingTeamMember.setInstagram(
                 updatedTeamMember.getInstagram()
         );
 
+
         existingTeamMember.setLinkedin(
                 updatedTeamMember.getLinkedin()
         );
+
+
+        /*
+         * NEW CUSTOM SOCIAL LINKS
+         */
+        existingTeamMember.setSocialLinks(
+                updatedTeamMember.getSocialLinks()
+        );
+
 
         existingTeamMember.setDisplayOrder(
                 updatedTeamMember.getDisplayOrder()
@@ -117,10 +138,13 @@ public class TeamMemberService {
     // =====================================================
 
     @Transactional
-    public void deleteTeamMember(Long id) {
+    public void deleteTeamMember(
+            Long id
+    ) {
 
         TeamMember existingTeamMember =
                 getTeamMemberById(id);
+
 
         teamMemberRepository.delete(
                 existingTeamMember

@@ -2,14 +2,18 @@ package com.manifessto.backend.controller;
 
 import com.manifessto.backend.entity.TeamMember;
 import com.manifessto.backend.service.TeamMemberService;
+
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/team-members")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(
+        origins = "http://localhost:5173"
+)
 public class TeamMemberController {
 
     private final TeamMemberService teamMemberService;
@@ -18,7 +22,9 @@ public class TeamMemberController {
     public TeamMemberController(
             TeamMemberService teamMemberService
     ) {
-        this.teamMemberService = teamMemberService;
+
+        this.teamMemberService =
+                teamMemberService;
     }
 
 
@@ -27,10 +33,12 @@ public class TeamMemberController {
     // =====================================================
 
     @GetMapping
-    public ResponseEntity<List<TeamMember>> getAllTeamMembers() {
+    public ResponseEntity<List<TeamMember>>
+    getAllTeamMembers() {
 
         return ResponseEntity.ok(
-                teamMemberService.getAllTeamMembers()
+                teamMemberService
+                        .getAllTeamMembers()
         );
     }
 
@@ -40,12 +48,14 @@ public class TeamMemberController {
     // =====================================================
 
     @GetMapping("/{id}")
-    public ResponseEntity<TeamMember> getTeamMemberById(
+    public ResponseEntity<TeamMember>
+    getTeamMemberById(
             @PathVariable Long id
     ) {
 
         return ResponseEntity.ok(
-                teamMemberService.getTeamMemberById(id)
+                teamMemberService
+                        .getTeamMemberById(id)
         );
     }
 
@@ -55,14 +65,16 @@ public class TeamMemberController {
     // =====================================================
 
     @PostMapping
-    public ResponseEntity<TeamMember> addTeamMember(
+    public ResponseEntity<TeamMember>
+    addTeamMember(
             @RequestBody TeamMember teamMember
     ) {
 
         return ResponseEntity.ok(
-                teamMemberService.addTeamMember(
-                        teamMember
-                )
+                teamMemberService
+                        .addTeamMember(
+                                teamMember
+                        )
         );
     }
 
@@ -72,16 +84,18 @@ public class TeamMemberController {
     // =====================================================
 
     @PutMapping("/{id}")
-    public ResponseEntity<TeamMember> updateTeamMember(
+    public ResponseEntity<TeamMember>
+    updateTeamMember(
             @PathVariable Long id,
             @RequestBody TeamMember teamMember
     ) {
 
         return ResponseEntity.ok(
-                teamMemberService.updateTeamMember(
-                        id,
-                        teamMember
-                )
+                teamMemberService
+                        .updateTeamMember(
+                                id,
+                                teamMember
+                        )
         );
     }
 
@@ -91,12 +105,16 @@ public class TeamMemberController {
     // =====================================================
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTeamMember(
+    public ResponseEntity<Void>
+    deleteTeamMember(
             @PathVariable Long id
     ) {
 
-        teamMemberService.deleteTeamMember(id);
+        teamMemberService
+                .deleteTeamMember(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

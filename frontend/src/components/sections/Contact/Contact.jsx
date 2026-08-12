@@ -84,10 +84,10 @@ const Contact = () => {
             </p>
 
             <a
-              href="tel:+917720066417"
-              className="contact-item-value"
+              href="tel:+917888156307"
+              aria-label="Call Manifessto Studios"
             >
-              +91 77200 66417
+              +91 78881 56307
             </a>
 
           </div>

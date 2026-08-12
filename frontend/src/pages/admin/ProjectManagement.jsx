@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import "./ProjectManagement.css";
 
-const PROJECT_API = "http://localhost:8080/api/projects";
-const CATEGORY_API = "http://localhost:8080/api/project-categories";
+const PROJECT_API =
+  "http://localhost:8080/api/projects";
+
+const CATEGORY_API =
+  "http://localhost:8080/api/project-categories";
+
+const UPLOAD_API_URL =
+  "http://localhost:8080/api/uploads/image";
 
 const EMPTY_PROJECT = {
   title: "",
@@ -26,11 +32,20 @@ const ProjectManagement = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  const [projectFormOpen, setProjectFormOpen] = useState(false);
-  const [categoryFormOpen, setCategoryFormOpen] = useState(false);
+  const [uploadingImage, setUploadingImage] =
+    useState(false);
 
-  const [editingProject, setEditingProject] = useState(null);
-  const [editingCategory, setEditingCategory] = useState(null);
+  const [projectFormOpen, setProjectFormOpen] =
+    useState(false);
+
+  const [categoryFormOpen, setCategoryFormOpen] =
+    useState(false);
+
+  const [editingProject, setEditingProject] =
+    useState(null);
+
+  const [editingCategory, setEditingCategory] =
+    useState(null);
 
   const [projectForm, setProjectForm] = useState({
     ...EMPTY_PROJECT,
@@ -49,6 +64,10 @@ const ProjectManagement = () => {
   const [deletingCategoryId, setDeletingCategoryId] =
     useState(null);
 
+  // =====================================================
+  // TOKEN
+  // =====================================================
+
   const getToken = () => {
     return localStorage.getItem("adminToken");
   };
@@ -59,7 +78,8 @@ const ProjectManagement = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch(PROJECT_API);
+      const response =
+        await fetch(PROJECT_API);
 
       if (!response.ok) {
         throw new Error(
@@ -67,20 +87,29 @@ const ProjectManagement = () => {
         );
       }
 
-      const data = await response.json();
+      const data =
+        await response.json();
 
-      const sortedProjects = Array.isArray(data)
-        ? [...data].sort(
-            (a, b) =>
-              (a.displayOrder ?? 0) -
-              (b.displayOrder ?? 0)
-          )
-        : [];
+      const sortedProjects =
+        Array.isArray(data)
+          ? [...data].sort(
+              (a, b) =>
+                (a.displayOrder ?? 0) -
+                (b.displayOrder ?? 0)
+            )
+          : [];
 
       setProjects(sortedProjects);
     } catch (err) {
-      console.error("Fetch projects error:", err);
-      setError(err.message || "Unable to load projects.");
+      console.error(
+        "Fetch projects error:",
+        err
+      );
+
+      setError(
+        err.message ||
+          "Unable to load projects."
+      );
     }
   };
 
@@ -90,7 +119,8 @@ const ProjectManagement = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(CATEGORY_API);
+      const response =
+        await fetch(CATEGORY_API);
 
       if (!response.ok) {
         throw new Error(
@@ -98,21 +128,28 @@ const ProjectManagement = () => {
         );
       }
 
-      const data = await response.json();
+      const data =
+        await response.json();
 
-      const sortedCategories = Array.isArray(data)
-        ? [...data].sort(
-            (a, b) =>
-              (a.displayOrder ?? 0) -
-              (b.displayOrder ?? 0)
-          )
-        : [];
+      const sortedCategories =
+        Array.isArray(data)
+          ? [...data].sort(
+              (a, b) =>
+                (a.displayOrder ?? 0) -
+                (b.displayOrder ?? 0)
+            )
+          : [];
 
       setCategories(sortedCategories);
     } catch (err) {
-      console.error("Fetch categories error:", err);
+      console.error(
+        "Fetch categories error:",
+        err
+      );
+
       setError(
-        err.message || "Unable to load categories."
+        err.message ||
+          "Unable to load categories."
       );
     }
   };
@@ -142,13 +179,19 @@ const ProjectManagement = () => {
   // =====================================================
 
   const handleProjectChange = (event) => {
-    const { name, value, type, checked } =
-      event.target;
+    const {
+      name,
+      value,
+      type,
+      checked,
+    } = event.target;
 
     setProjectForm((previous) => ({
       ...previous,
       [name]:
-        type === "checkbox" ? checked : value,
+        type === "checkbox"
+          ? checked
+          : value,
     }));
 
     setError("");
@@ -160,14 +203,203 @@ const ProjectManagement = () => {
   // =====================================================
 
   const handleCategoryChange = (event) => {
-    const { name, value, type, checked } =
-      event.target;
+    const {
+      name,
+      value,
+      type,
+      checked,
+    } = event.target;
 
     setCategoryForm((previous) => ({
       ...previous,
       [name]:
-        type === "checkbox" ? checked : value,
+        type === "checkbox"
+          ? checked
+          : value,
     }));
+
+    setError("");
+    setSuccess("");
+  };
+
+  // =====================================================
+  // IMAGE UPLOAD
+  // SAME METHOD AS TEAM MANAGEMENT
+  // =====================================================
+
+  const handleImageUpload = async (
+    event
+  ) => {
+    const file =
+      event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    setError("");
+    setSuccess("");
+
+    // -----------------------------------------------------
+    // FILE TYPE
+    // -----------------------------------------------------
+
+    if (
+      !file.type.startsWith("image/")
+    ) {
+      setError(
+        "Please select a valid image file."
+      );
+
+      event.target.value = "";
+
+      return;
+    }
+
+    // -----------------------------------------------------
+    // FILE SIZE
+    // -----------------------------------------------------
+
+    const maxSize =
+      10 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+      setError(
+        "Image size must be less than 10 MB."
+      );
+
+      event.target.value = "";
+
+      return;
+    }
+
+    // -----------------------------------------------------
+    // TOKEN
+    // -----------------------------------------------------
+
+    const token = getToken();
+
+    if (!token) {
+      setError(
+        "Your admin session has expired. Please login again."
+      );
+
+      event.target.value = "";
+
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      const uploadData =
+        new FormData();
+
+      // IMPORTANT:
+      // Backend expects "image"
+      uploadData.append(
+        "image",
+        file
+      );
+
+      const response =
+        await fetch(
+          UPLOAD_API_URL,
+          {
+            method: "POST",
+
+            headers: {
+              Authorization:
+                `Bearer ${token}`,
+            },
+
+            body: uploadData,
+          }
+        );
+
+      // ---------------------------------------------------
+      // AUTH ERROR
+      // ---------------------------------------------------
+
+      if (
+        response.status === 401 ||
+        response.status === 403
+      ) {
+        throw new Error(
+          "You are not authorized to upload images. Please login again."
+        );
+      }
+
+      // ---------------------------------------------------
+      // OTHER ERROR
+      // ---------------------------------------------------
+
+      if (!response.ok) {
+        const errorText =
+          await response.text();
+
+        throw new Error(
+          errorText ||
+            `Image upload failed (${response.status}).`
+        );
+      }
+
+      // ---------------------------------------------------
+      // RESPONSE
+      // ---------------------------------------------------
+
+      const data =
+        await response.json();
+
+      if (!data.url) {
+        throw new Error(
+          "Image uploaded but no image URL was returned."
+        );
+      }
+
+      // ---------------------------------------------------
+      // SAVE CLOUDINARY URL
+      // ---------------------------------------------------
+
+      setProjectForm(
+        (previous) => ({
+          ...previous,
+          imageUrl: data.url,
+        })
+      );
+
+      setSuccess(
+        "Image uploaded successfully."
+      );
+    } catch (err) {
+      console.error(
+        "Image upload error:",
+        err
+      );
+
+      setError(
+        err.message ||
+          "Unable to upload image."
+      );
+    } finally {
+      setUploadingImage(false);
+
+      // Allows selecting same image again
+      event.target.value = "";
+    }
+  };
+
+  // =====================================================
+  // REMOVE IMAGE
+  // =====================================================
+
+  const handleRemoveImage = () => {
+    setProjectForm(
+      (previous) => ({
+        ...previous,
+        imageUrl: "",
+      })
+    );
 
     setError("");
     setSuccess("");
@@ -182,7 +414,8 @@ const ProjectManagement = () => {
 
     setProjectForm({
       ...EMPTY_PROJECT,
-      displayOrder: projects.length + 1,
+      displayOrder:
+        projects.length + 1,
     });
 
     setProjectFormOpen(true);
@@ -196,22 +429,40 @@ const ProjectManagement = () => {
   // OPEN EDIT PROJECT
   // =====================================================
 
-  const openEditProject = (project) => {
+  const openEditProject = (
+    project
+  ) => {
     setEditingProject(project);
 
     setProjectForm({
-      title: project.title || "",
-      categoryId: project.category?.id
-        ? String(project.category.id)
-        : "",
-      imageUrl: project.imageUrl || "",
-      featured: Boolean(project.featured),
-      displayOrder: project.displayOrder ?? "",
+      title:
+        project.title || "",
+
+      categoryId:
+        project.category?.id
+          ? String(
+              project.category.id
+            )
+          : "",
+
+      imageUrl:
+        project.imageUrl || "",
+
+      featured:
+        Boolean(project.featured),
+
+      displayOrder:
+        project.displayOrder ?? "",
+
       active:
-        project.active === undefined ||
-        project.active === null
+        project.active ===
+          undefined ||
+        project.active ===
+          null
           ? true
-          : Boolean(project.active),
+          : Boolean(
+              project.active
+            ),
     });
 
     setProjectFormOpen(true);
@@ -228,136 +479,217 @@ const ProjectManagement = () => {
   const closeProjectForm = () => {
     setProjectFormOpen(false);
     setEditingProject(null);
+
     setProjectForm({
       ...EMPTY_PROJECT,
     });
+
+    setError("");
+    setSuccess("");
   };
 
   // =====================================================
   // SAVE PROJECT
   // =====================================================
 
-  const handleProjectSubmit = async (event) => {
-    event.preventDefault();
+  const handleProjectSubmit =
+    async (event) => {
+      event.preventDefault();
 
-    const token = getToken();
+      const token = getToken();
 
-    if (!token) {
-      setError(
-        "Admin session expired. Please login again."
-      );
-      return;
-    }
-
-    const title = projectForm.title.trim();
-    const imageUrl = projectForm.imageUrl.trim();
-    const categoryId = Number(
-      projectForm.categoryId
-    );
-    const displayOrder = Number(
-      projectForm.displayOrder
-    );
-
-    if (!title) {
-      setError("Project title is required.");
-      return;
-    }
-
-    if (!categoryId) {
-      setError("Please select a category.");
-      return;
-    }
-
-    if (!imageUrl) {
-      setError("Image URL is required.");
-      return;
-    }
-
-    if (
-      !Number.isInteger(displayOrder) ||
-      displayOrder < 1
-    ) {
-      setError(
-        "Display order must be a positive number."
-      );
-      return;
-    }
-
-    const payload = {
-      title,
-      imageUrl,
-      featured: Boolean(projectForm.featured),
-      displayOrder,
-      active: Boolean(projectForm.active),
-    };
-
-    const isEditing = Boolean(editingProject);
-
-    const url = isEditing
-      ? `${PROJECT_API}/${editingProject.id}?categoryId=${categoryId}`
-      : `${PROJECT_API}?categoryId=${categoryId}`;
-
-    try {
-      setSaving(true);
-      setError("");
-      setSuccess("");
-
-      const response = await fetch(url, {
-        method: isEditing ? "PUT" : "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-
-        body: JSON.stringify(payload),
-      });
-
-      if (response.status === 401 || response.status === 403) {
-        throw new Error(
-          "You are not authorized. Please login again."
+      if (!token) {
+        setError(
+          "Admin session expired. Please login again."
         );
+
+        return;
       }
 
-      if (!response.ok) {
-        const text = await response.text();
-
-        throw new Error(
-          text ||
-            `Failed to ${
-              isEditing ? "update" : "create"
-            } project.`
+      if (uploadingImage) {
+        setError(
+          "Please wait until the image upload is complete."
         );
+
+        return;
       }
 
-      setSuccess(
+      const title =
+        projectForm.title.trim();
+
+      const imageUrl =
+        projectForm.imageUrl.trim();
+
+      const categoryId =
+        Number(
+          projectForm.categoryId
+        );
+
+      const displayOrder =
+        Number(
+          projectForm.displayOrder
+        );
+
+      // ---------------------------------------------------
+      // VALIDATION
+      // ---------------------------------------------------
+
+      if (!title) {
+        setError(
+          "Project title is required."
+        );
+
+        return;
+      }
+
+      if (!categoryId) {
+        setError(
+          "Please select a category."
+        );
+
+        return;
+      }
+
+      if (!imageUrl) {
+        setError(
+          "Please upload a project image."
+        );
+
+        return;
+      }
+
+      if (
+        !Number.isInteger(
+          displayOrder
+        ) ||
+        displayOrder < 1
+      ) {
+        setError(
+          "Display order must be a positive number."
+        );
+
+        return;
+      }
+
+      // ---------------------------------------------------
+      // PAYLOAD
+      // ---------------------------------------------------
+
+      const payload = {
+        title,
+
+        imageUrl,
+
+        featured:
+          Boolean(
+            projectForm.featured
+          ),
+
+        displayOrder,
+
+        active:
+          Boolean(
+            projectForm.active
+          ),
+      };
+
+      const isEditing =
+        Boolean(editingProject);
+
+      const url =
         isEditing
-          ? "Project updated successfully."
-          : "Project created successfully."
-      );
+          ? `${PROJECT_API}/${editingProject.id}?categoryId=${categoryId}`
+          : `${PROJECT_API}?categoryId=${categoryId}`;
 
-      closeProjectForm();
+      try {
+        setSaving(true);
+        setError("");
+        setSuccess("");
 
-      await fetchProjects();
-    } catch (err) {
-      console.error("Save project error:", err);
+        const response =
+          await fetch(
+            url,
+            {
+              method:
+                isEditing
+                  ? "PUT"
+                  : "POST",
 
-      setError(
-        err.message || "Unable to save project."
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
+              headers: {
+                "Content-Type":
+                  "application/json",
+
+                Authorization:
+                  `Bearer ${token}`,
+              },
+
+              body:
+                JSON.stringify(
+                  payload
+                ),
+            }
+          );
+
+        if (
+          response.status ===
+            401 ||
+          response.status ===
+            403
+        ) {
+          throw new Error(
+            "You are not authorized. Please login again."
+          );
+        }
+
+        if (!response.ok) {
+          const text =
+            await response.text();
+
+          throw new Error(
+            text ||
+              `Failed to ${
+                isEditing
+                  ? "update"
+                  : "create"
+              } project.`
+          );
+        }
+
+        setSuccess(
+          isEditing
+            ? "Project updated successfully."
+            : "Project created successfully."
+        );
+
+        closeProjectForm();
+
+        await fetchProjects();
+      } catch (err) {
+        console.error(
+          "Save project error:",
+          err
+        );
+
+        setError(
+          err.message ||
+            "Unable to save project."
+        );
+      } finally {
+        setSaving(false);
+      }
+    };
 
   // =====================================================
   // DELETE PROJECT
   // =====================================================
 
-  const deleteProject = async (id) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this project?"
-    );
+  const deleteProject = async (
+    id
+  ) => {
+    const confirmed =
+      window.confirm(
+        "Are you sure you want to delete this project?"
+      );
 
     if (!confirmed) {
       return;
@@ -369,24 +701,28 @@ const ProjectManagement = () => {
       setError(
         "Admin session expired. Please login again."
       );
+
       return;
     }
 
     try {
       setDeletingProjectId(id);
+
       setError("");
       setSuccess("");
 
-      const response = await fetch(
-        `${PROJECT_API}/${id}`,
-        {
-          method: "DELETE",
+      const response =
+        await fetch(
+          `${PROJECT_API}/${id}`,
+          {
+            method: "DELETE",
 
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+            headers: {
+              Authorization:
+                `Bearer ${token}`,
+            },
+          }
+        );
 
       if (
         response.status === 401 ||
@@ -398,10 +734,12 @@ const ProjectManagement = () => {
       }
 
       if (!response.ok) {
-        const text = await response.text();
+        const text =
+          await response.text();
 
         throw new Error(
-          text || "Failed to delete project."
+          text ||
+            "Failed to delete project."
         );
       }
 
@@ -411,13 +749,19 @@ const ProjectManagement = () => {
 
       await fetchProjects();
     } catch (err) {
-      console.error("Delete project error:", err);
+      console.error(
+        "Delete project error:",
+        err
+      );
 
       setError(
-        err.message || "Unable to delete project."
+        err.message ||
+          "Unable to delete project."
       );
     } finally {
-      setDeletingProjectId(null);
+      setDeletingProjectId(
+        null
+      );
     }
   };
 
@@ -430,7 +774,9 @@ const ProjectManagement = () => {
 
     setCategoryForm({
       ...EMPTY_CATEGORY,
-      displayOrder: categories.length + 1,
+
+      displayOrder:
+        categories.length + 1,
     });
 
     setCategoryFormOpen(true);
@@ -444,17 +790,30 @@ const ProjectManagement = () => {
   // OPEN EDIT CATEGORY
   // =====================================================
 
-  const openEditCategory = (category) => {
-    setEditingCategory(category);
+  const openEditCategory = (
+    category
+  ) => {
+    setEditingCategory(
+      category
+    );
 
     setCategoryForm({
-      name: category.name || "",
-      displayOrder: category.displayOrder ?? "",
+      name:
+        category.name || "",
+
+      displayOrder:
+        category.displayOrder ??
+        "",
+
       active:
-        category.active === undefined ||
-        category.active === null
+        category.active ===
+          undefined ||
+        category.active ===
+          null
           ? true
-          : Boolean(category.active),
+          : Boolean(
+              category.active
+            ),
     });
 
     setCategoryFormOpen(true);
@@ -475,123 +834,165 @@ const ProjectManagement = () => {
     setCategoryForm({
       ...EMPTY_CATEGORY,
     });
+
+    setError("");
+    setSuccess("");
   };
 
   // =====================================================
   // SAVE CATEGORY
   // =====================================================
 
-  const handleCategorySubmit = async (event) => {
-    event.preventDefault();
+  const handleCategorySubmit =
+    async (event) => {
+      event.preventDefault();
 
-    const token = getToken();
+      const token = getToken();
 
-    if (!token) {
-      setError(
-        "Admin session expired. Please login again."
-      );
-      return;
-    }
+      if (!token) {
+        setError(
+          "Admin session expired. Please login again."
+        );
 
-    const name = categoryForm.name.trim();
+        return;
+      }
 
-    const displayOrder = Number(
-      categoryForm.displayOrder
-    );
+      const name =
+        categoryForm.name.trim();
 
-    if (!name) {
-      setError("Category name is required.");
-      return;
-    }
+      const displayOrder =
+        Number(
+          categoryForm.displayOrder
+        );
 
-    if (
-      !Number.isInteger(displayOrder) ||
-      displayOrder < 1
-    ) {
-      setError(
-        "Display order must be a positive number."
-      );
-      return;
-    }
+      if (!name) {
+        setError(
+          "Category name is required."
+        );
 
-    const payload = {
-      name,
-      displayOrder,
-      active: Boolean(categoryForm.active),
-    };
-
-    const isEditing =
-      Boolean(editingCategory);
-
-    const url = isEditing
-      ? `${CATEGORY_API}/${editingCategory.id}`
-      : CATEGORY_API;
-
-    try {
-      setSaving(true);
-      setError("");
-      setSuccess("");
-
-      const response = await fetch(url, {
-        method: isEditing ? "PUT" : "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-
-        body: JSON.stringify(payload),
-      });
+        return;
+      }
 
       if (
-        response.status === 401 ||
-        response.status === 403
+        !Number.isInteger(
+          displayOrder
+        ) ||
+        displayOrder < 1
       ) {
-        throw new Error(
-          "You are not authorized. Please login again."
+        setError(
+          "Display order must be a positive number."
         );
+
+        return;
       }
 
-      if (!response.ok) {
-        const text = await response.text();
+      const payload = {
+        name,
 
-        throw new Error(
-          text || "Failed to save category."
+        displayOrder,
+
+        active:
+          Boolean(
+            categoryForm.active
+          ),
+      };
+
+      const isEditing =
+        Boolean(
+          editingCategory
         );
-      }
 
-      setSuccess(
+      const url =
         isEditing
-          ? "Category updated successfully."
-          : "Category created successfully."
-      );
+          ? `${CATEGORY_API}/${editingCategory.id}`
+          : CATEGORY_API;
 
-      closeCategoryForm();
+      try {
+        setSaving(true);
 
-      await fetchCategories();
-    } catch (err) {
-      console.error(
-        "Save category error:",
-        err
-      );
+        setError("");
+        setSuccess("");
 
-      setError(
-        err.message ||
-          "Unable to save category."
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
+        const response =
+          await fetch(
+            url,
+            {
+              method:
+                isEditing
+                  ? "PUT"
+                  : "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json",
+
+                Authorization:
+                  `Bearer ${token}`,
+              },
+
+              body:
+                JSON.stringify(
+                  payload
+                ),
+            }
+          );
+
+        if (
+          response.status ===
+            401 ||
+          response.status ===
+            403
+        ) {
+          throw new Error(
+            "You are not authorized. Please login again."
+          );
+        }
+
+        if (!response.ok) {
+          const text =
+            await response.text();
+
+          throw new Error(
+            text ||
+              "Failed to save category."
+          );
+        }
+
+        setSuccess(
+          isEditing
+            ? "Category updated successfully."
+            : "Category created successfully."
+        );
+
+        closeCategoryForm();
+
+        await fetchCategories();
+      } catch (err) {
+        console.error(
+          "Save category error:",
+          err
+        );
+
+        setError(
+          err.message ||
+            "Unable to save category."
+        );
+      } finally {
+        setSaving(false);
+      }
+    };
 
   // =====================================================
   // DELETE CATEGORY
   // =====================================================
 
-  const deleteCategory = async (id) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this category?"
-    );
+  const deleteCategory = async (
+    id
+  ) => {
+    const confirmed =
+      window.confirm(
+        "Are you sure you want to delete this category?"
+      );
 
     if (!confirmed) {
       return;
@@ -603,28 +1004,34 @@ const ProjectManagement = () => {
       setError(
         "Admin session expired. Please login again."
       );
+
       return;
     }
 
     try {
       setDeletingCategoryId(id);
+
       setError("");
       setSuccess("");
 
-      const response = await fetch(
-        `${CATEGORY_API}/${id}`,
-        {
-          method: "DELETE",
+      const response =
+        await fetch(
+          `${CATEGORY_API}/${id}`,
+          {
+            method: "DELETE",
 
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+            headers: {
+              Authorization:
+                `Bearer ${token}`,
+            },
+          }
+        );
 
       if (
-        response.status === 401 ||
-        response.status === 403
+        response.status ===
+          401 ||
+        response.status ===
+          403
       ) {
         throw new Error(
           "You are not authorized. Please login again."
@@ -632,10 +1039,12 @@ const ProjectManagement = () => {
       }
 
       if (!response.ok) {
-        const text = await response.text();
+        const text =
+          await response.text();
 
         throw new Error(
-          text || "Failed to delete category."
+          text ||
+            "Failed to delete category."
         );
       }
 
@@ -656,7 +1065,9 @@ const ProjectManagement = () => {
           "Unable to delete category."
       );
     } finally {
-      setDeletingCategoryId(null);
+      setDeletingCategoryId(
+        null
+      );
     }
   };
 
@@ -672,16 +1083,20 @@ const ProjectManagement = () => {
       <div className="project-management-header">
 
         <div>
+
           <p className="admin-section-eyebrow">
             CONTENT MANAGEMENT
           </p>
 
-          <h2>Projects</h2>
+          <h2>
+            Projects
+          </h2>
 
           <p>
             Manage your studio projects and
             featured work.
           </p>
+
         </div>
 
         <div className="project-header-actions">
@@ -689,7 +1104,9 @@ const ProjectManagement = () => {
           <button
             type="button"
             className="project-category-button"
-            onClick={openAddCategory}
+            onClick={
+              openAddCategory
+            }
           >
             + Category
           </button>
@@ -697,13 +1114,18 @@ const ProjectManagement = () => {
           <button
             type="button"
             className="add-project-button"
-            onClick={openAddProject}
+            onClick={
+              openAddProject
+            }
           >
             <span>+</span>
-            <span>Add Project</span>
+            <span>
+              Add Project
+            </span>
           </button>
 
         </div>
+
       </div>
 
 
@@ -725,28 +1147,37 @@ const ProjectManagement = () => {
       {/* CATEGORY FORM */}
 
       {categoryFormOpen && (
+
         <div className="project-form-card">
 
           <div className="project-form-header">
 
             <div>
+
               <p className="admin-section-eyebrow">
+
                 {editingCategory
                   ? "EDIT CATEGORY"
                   : "NEW CATEGORY"}
+
               </p>
 
               <h3>
+
                 {editingCategory
                   ? "Edit Category"
                   : "Add Category"}
+
               </h3>
+
             </div>
 
             <button
               type="button"
               className="project-close-button"
-              onClick={closeCategoryForm}
+              onClick={
+                closeCategoryForm
+              }
               disabled={saving}
             >
               ×
@@ -757,7 +1188,9 @@ const ProjectManagement = () => {
 
           <form
             className="project-form"
-            onSubmit={handleCategorySubmit}
+            onSubmit={
+              handleCategorySubmit
+            }
           >
 
             <div className="project-form-group">
@@ -769,8 +1202,12 @@ const ProjectManagement = () => {
               <input
                 type="text"
                 name="name"
-                value={categoryForm.name}
-                onChange={handleCategoryChange}
+                value={
+                  categoryForm.name
+                }
+                onChange={
+                  handleCategoryChange
+                }
                 placeholder="Brand Films"
                 disabled={saving}
                 required
@@ -791,7 +1228,9 @@ const ProjectManagement = () => {
                 value={
                   categoryForm.displayOrder
                 }
-                onChange={handleCategoryChange}
+                onChange={
+                  handleCategoryChange
+                }
                 min="1"
                 step="1"
                 disabled={saving}
@@ -808,12 +1247,18 @@ const ProjectManagement = () => {
                 <input
                   type="checkbox"
                   name="active"
-                  checked={categoryForm.active}
-                  onChange={handleCategoryChange}
+                  checked={
+                    categoryForm.active
+                  }
+                  onChange={
+                    handleCategoryChange
+                  }
                   disabled={saving}
                 />
 
-                <span>Active</span>
+                <span>
+                  Active
+                </span>
 
               </label>
 
@@ -825,7 +1270,9 @@ const ProjectManagement = () => {
               <button
                 type="button"
                 className="project-cancel-button"
-                onClick={closeCategoryForm}
+                onClick={
+                  closeCategoryForm
+                }
                 disabled={saving}
               >
                 Cancel
@@ -836,46 +1283,62 @@ const ProjectManagement = () => {
                 className="project-save-button"
                 disabled={saving}
               >
+
                 {saving
                   ? "Saving..."
                   : editingCategory
                   ? "Update Category"
                   : "Create Category"}
+
               </button>
 
             </div>
 
           </form>
+
         </div>
+
       )}
 
 
       {/* PROJECT FORM */}
 
       {projectFormOpen && (
+
         <div className="project-form-card">
 
           <div className="project-form-header">
 
             <div>
+
               <p className="admin-section-eyebrow">
+
                 {editingProject
                   ? "EDIT PROJECT"
                   : "NEW PROJECT"}
+
               </p>
 
               <h3>
+
                 {editingProject
                   ? "Edit Project"
                   : "Add Project"}
+
               </h3>
+
             </div>
 
             <button
               type="button"
               className="project-close-button"
-              onClick={closeProjectForm}
-              disabled={saving}
+              onClick={
+                closeProjectForm
+              }
+              disabled={
+                saving ||
+                uploadingImage
+              }
             >
               ×
             </button>
@@ -885,8 +1348,12 @@ const ProjectManagement = () => {
 
           <form
             className="project-form"
-            onSubmit={handleProjectSubmit}
+            onSubmit={
+              handleProjectSubmit
+            }
           >
+
+            {/* PROJECT TITLE */}
 
             <div className="project-form-group">
 
@@ -897,15 +1364,24 @@ const ProjectManagement = () => {
               <input
                 type="text"
                 name="title"
-                value={projectForm.title}
-                onChange={handleProjectChange}
+                value={
+                  projectForm.title
+                }
+                onChange={
+                  handleProjectChange
+                }
                 placeholder="LG Brand Campaign"
-                disabled={saving}
+                disabled={
+                  saving ||
+                  uploadingImage
+                }
                 required
               />
 
             </div>
 
+
+            {/* CATEGORY */}
 
             <div className="project-form-group">
 
@@ -915,9 +1391,16 @@ const ProjectManagement = () => {
 
               <select
                 name="categoryId"
-                value={projectForm.categoryId}
-                onChange={handleProjectChange}
-                disabled={saving}
+                value={
+                  projectForm.categoryId
+                }
+                onChange={
+                  handleProjectChange
+                }
+                disabled={
+                  saving ||
+                  uploadingImage
+                }
                 required
               >
 
@@ -925,38 +1408,130 @@ const ProjectManagement = () => {
                   Select Category
                 </option>
 
-                {categories.map((category) => (
-                  <option
-                    key={category.id}
-                    value={category.id}
-                  >
-                    {category.name}
-                  </option>
-                ))}
+                {categories.map(
+                  (category) => (
+
+                    <option
+                      key={
+                        category.id
+                      }
+                      value={
+                        category.id
+                      }
+                    >
+                      {category.name}
+                    </option>
+
+                  )
+                )}
 
               </select>
 
             </div>
 
 
+            {/* =================================================
+                PROJECT IMAGE UPLOAD
+            ================================================= */}
+
             <div className="project-form-group project-form-full">
 
               <label>
-                Image URL
+                Project Image
               </label>
 
-              <input
-                type="url"
-                name="imageUrl"
-                value={projectForm.imageUrl}
-                onChange={handleProjectChange}
-                placeholder="https://..."
-                disabled={saving}
-                required
-              />
+              <div className="project-image-upload">
+
+                <div className="project-image-upload-row">
+
+                  <label
+                    htmlFor="project-image-upload"
+                    className="project-image-select-button"
+                  >
+
+                    {uploadingImage
+                      ? "Uploading..."
+                      : "Choose Image"}
+
+                  </label>
+
+                  <input
+                    id="project-image-upload"
+                    type="file"
+                    accept="image/png,image/jpeg,image/jpg,image/webp"
+                    onChange={
+                      handleImageUpload
+                    }
+                    disabled={
+                      saving ||
+                      uploadingImage
+                    }
+                  />
+
+                </div>
+
+
+                {projectForm.imageUrl && (
+
+                  <div className="project-image-preview">
+
+                    <img
+                      src={
+                        projectForm.imageUrl
+                      }
+                      alt="Project preview"
+                    />
+
+                    <div className="project-image-preview-info">
+
+                      <div>
+
+                        <span>
+                          ✓ Image uploaded
+                        </span>
+
+                        <small>
+                          Cloudinary image ready
+                        </small>
+
+                      </div>
+
+                      <button
+                        type="button"
+                        className="project-remove-image-button"
+                        onClick={
+                          handleRemoveImage
+                        }
+                        disabled={
+                          saving ||
+                          uploadingImage
+                        }
+                      >
+                        Remove
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                )}
+
+
+                {!projectForm.imageUrl && (
+
+                  <p className="project-image-help">
+                    JPG, PNG or WEBP · Maximum
+                    10 MB
+                  </p>
+
+                )}
+
+              </div>
 
             </div>
 
+
+            {/* DISPLAY ORDER */}
 
             <div className="project-form-group">
 
@@ -970,15 +1545,22 @@ const ProjectManagement = () => {
                 value={
                   projectForm.displayOrder
                 }
-                onChange={handleProjectChange}
+                onChange={
+                  handleProjectChange
+                }
                 min="1"
                 step="1"
-                disabled={saving}
+                disabled={
+                  saving ||
+                  uploadingImage
+                }
                 required
               />
 
             </div>
 
+
+            {/* OPTIONS */}
 
             <div className="project-options">
 
@@ -987,12 +1569,21 @@ const ProjectManagement = () => {
                 <input
                   type="checkbox"
                   name="featured"
-                  checked={projectForm.featured}
-                  onChange={handleProjectChange}
-                  disabled={saving}
+                  checked={
+                    projectForm.featured
+                  }
+                  onChange={
+                    handleProjectChange
+                  }
+                  disabled={
+                    saving ||
+                    uploadingImage
+                  }
                 />
 
-                <span>Featured</span>
+                <span>
+                  Featured
+                </span>
 
               </label>
 
@@ -1002,25 +1593,41 @@ const ProjectManagement = () => {
                 <input
                   type="checkbox"
                   name="active"
-                  checked={projectForm.active}
-                  onChange={handleProjectChange}
-                  disabled={saving}
+                  checked={
+                    projectForm.active
+                  }
+                  onChange={
+                    handleProjectChange
+                  }
+                  disabled={
+                    saving ||
+                    uploadingImage
+                  }
                 />
 
-                <span>Active</span>
+                <span>
+                  Active
+                </span>
 
               </label>
 
             </div>
 
 
+            {/* ACTIONS */}
+
             <div className="project-form-actions">
 
               <button
                 type="button"
                 className="project-cancel-button"
-                onClick={closeProjectForm}
-                disabled={saving}
+                onClick={
+                  closeProjectForm
+                }
+                disabled={
+                  saving ||
+                  uploadingImage
+                }
               >
                 Cancel
               </button>
@@ -1028,19 +1635,28 @@ const ProjectManagement = () => {
               <button
                 type="submit"
                 className="project-save-button"
-                disabled={saving}
+                disabled={
+                  saving ||
+                  uploadingImage
+                }
               >
-                {saving
+
+                {uploadingImage
+                  ? "Uploading Image..."
+                  : saving
                   ? "Saving..."
                   : editingProject
                   ? "Update Project"
                   : "Create Project"}
+
               </button>
 
             </div>
 
           </form>
+
         </div>
+
       )}
 
 
@@ -1051,6 +1667,7 @@ const ProjectManagement = () => {
         <div className="project-section-heading">
 
           <div>
+
             <p className="admin-section-eyebrow">
               CATEGORIES
             </p>
@@ -1058,13 +1675,17 @@ const ProjectManagement = () => {
             <h3>
               Project Categories
             </h3>
+
           </div>
 
           <span className="project-count">
+
             {categories.length}{" "}
+
             {categories.length === 1
               ? "Category"
               : "Categories"}
+
           </span>
 
         </div>
@@ -1073,85 +1694,106 @@ const ProjectManagement = () => {
         {categories.length === 0 ? (
 
           <div className="project-empty-small">
+
             <p>
               No project categories yet.
             </p>
+
           </div>
 
         ) : (
 
           <div className="category-list">
 
-            {categories.map((category) => (
+            {categories.map(
+              (category) => (
 
-              <div
-                className="category-row"
-                key={category.id}
-              >
-
-                <div className="category-order">
-                  {String(
-                    category.displayOrder ?? 0
-                  ).padStart(2, "0")}
-                </div>
-
-
-                <div className="category-info">
-
-                  <strong>
-                    {category.name}
-                  </strong>
-
-                  <span
-                    className={
-                      category.active
-                        ? "status-active"
-                        : "status-inactive"
-                    }
-                  >
-                    {category.active
-                      ? "Active"
-                      : "Inactive"}
-                  </span>
-
-                </div>
-
-
-                <div className="category-actions">
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      openEditCategory(category)
-                    }
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    type="button"
-                    className="danger"
-                    onClick={() =>
-                      deleteCategory(category.id)
-                    }
-                    disabled={
-                      deletingCategoryId ===
-                      category.id
-                    }
-                  >
-                    {deletingCategoryId ===
+                <div
+                  className="category-row"
+                  key={
                     category.id
-                      ? "Deleting..."
-                      : "Delete"}
-                  </button>
+                  }
+                >
+
+                  <div className="category-order">
+
+                    {String(
+                      category.displayOrder ??
+                        0
+                    ).padStart(
+                      2,
+                      "0"
+                    )}
+
+                  </div>
+
+
+                  <div className="category-info">
+
+                    <strong>
+                      {category.name}
+                    </strong>
+
+                    <span
+                      className={
+                        category.active
+                          ? "status-active"
+                          : "status-inactive"
+                      }
+                    >
+
+                      {category.active
+                        ? "Active"
+                        : "Inactive"}
+
+                    </span>
+
+                  </div>
+
+
+                  <div className="category-actions">
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openEditCategory(
+                          category
+                        )
+                      }
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      type="button"
+                      className="danger"
+                      onClick={() =>
+                        deleteCategory(
+                          category.id
+                        )
+                      }
+                      disabled={
+                        deletingCategoryId ===
+                        category.id
+                      }
+                    >
+
+                      {deletingCategoryId ===
+                      category.id
+                        ? "Deleting..."
+                        : "Delete"}
+
+                    </button>
+
+                  </div>
 
                 </div>
 
-              </div>
-
-            ))}
+              )
+            )}
 
           </div>
+
         )}
 
       </div>
@@ -1164,6 +1806,7 @@ const ProjectManagement = () => {
         <div className="project-section-heading">
 
           <div>
+
             <p className="admin-section-eyebrow">
               ALL PROJECTS
             </p>
@@ -1171,13 +1814,17 @@ const ProjectManagement = () => {
             <h3>
               Studio Projects
             </h3>
+
           </div>
 
           <span className="project-count">
+
             {projects.length}{" "}
+
             {projects.length === 1
               ? "Project"
               : "Projects"}
+
           </span>
 
         </div>
@@ -1187,14 +1834,17 @@ const ProjectManagement = () => {
 
           <div className="project-empty">
 
-            <span>◎</span>
+            <span>
+              ◎
+            </span>
 
             <h3>
               Loading projects...
             </h3>
 
             <p>
-              Fetching projects from database.
+              Fetching projects from
+              database.
             </p>
 
           </div>
@@ -1203,7 +1853,9 @@ const ProjectManagement = () => {
 
           <div className="project-empty">
 
-            <span>◎</span>
+            <span>
+              ◎
+            </span>
 
             <h3>
               No projects yet
@@ -1216,7 +1868,9 @@ const ProjectManagement = () => {
 
             <button
               type="button"
-              onClick={openAddProject}
+              onClick={
+                openAddProject
+              }
             >
               + Add Project
             </button>
@@ -1227,102 +1881,127 @@ const ProjectManagement = () => {
 
           <div className="project-list">
 
-            {projects.map((project) => (
+            {projects.map(
+              (project) => (
 
-              <article
-                className="admin-project-card"
-                key={project.id}
-              >
-
-                <div className="admin-project-image">
-
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                  />
-
-                </div>
-
-
-                <div className="admin-project-info">
-
-                  <h4>
-                    {project.title}
-                  </h4>
-
-                  <span>
-                    {project.category?.name ||
-                      "No Category"}
-                  </span>
-
-                </div>
-
-
-                <div className="admin-project-status">
-
-                  {project.featured && (
-                    <span className="project-badge featured">
-                      Featured
-                    </span>
-                  )}
-
-                  <span
-                    className={
-                      project.active
-                        ? "project-badge active"
-                        : "project-badge inactive"
-                    }
-                  >
-                    {project.active
-                      ? "Active"
-                      : "Inactive"}
-                  </span>
-
-                </div>
-
-
-                <div className="admin-project-order">
-                  {String(
-                    project.displayOrder ?? 0
-                  ).padStart(2, "0")}
-                </div>
-
-
-                <div className="admin-project-actions">
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      openEditProject(project)
-                    }
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    type="button"
-                    className="danger"
-                    onClick={() =>
-                      deleteProject(project.id)
-                    }
-                    disabled={
-                      deletingProjectId ===
-                      project.id
-                    }
-                  >
-                    {deletingProjectId ===
+                <article
+                  className="admin-project-card"
+                  key={
                     project.id
-                      ? "Deleting..."
-                      : "Delete"}
-                  </button>
+                  }
+                >
 
-                </div>
+                  <div className="admin-project-image">
 
-              </article>
+                    <img
+                      src={
+                        project.imageUrl
+                      }
+                      alt={
+                        project.title
+                      }
+                    />
 
-            ))}
+                  </div>
+
+
+                  <div className="admin-project-info">
+
+                    <h4>
+                      {project.title}
+                    </h4>
+
+                    <span>
+                      {project.category?.name ||
+                        "No Category"}
+                    </span>
+
+                  </div>
+
+
+                  <div className="admin-project-status">
+
+                    {project.featured && (
+
+                      <span className="project-badge featured">
+                        Featured
+                      </span>
+
+                    )}
+
+                    <span
+                      className={
+                        project.active
+                          ? "project-badge active"
+                          : "project-badge inactive"
+                      }
+                    >
+
+                      {project.active
+                        ? "Active"
+                        : "Inactive"}
+
+                    </span>
+
+                  </div>
+
+
+                  <div className="admin-project-order">
+
+                    {String(
+                      project.displayOrder ??
+                        0
+                    ).padStart(
+                      2,
+                      "0"
+                    )}
+
+                  </div>
+
+
+                  <div className="admin-project-actions">
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openEditProject(
+                          project
+                        )
+                      }
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      type="button"
+                      className="danger"
+                      onClick={() =>
+                        deleteProject(
+                          project.id
+                        )
+                      }
+                      disabled={
+                        deletingProjectId ===
+                        project.id
+                      }
+                    >
+
+                      {deletingProjectId ===
+                      project.id
+                        ? "Deleting..."
+                        : "Delete"}
+
+                    </button>
+
+                  </div>
+
+                </article>
+
+              )
+            )}
 
           </div>
+
         )}
 
       </div>

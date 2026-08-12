@@ -1,16 +1,157 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
 import api from "../../../services/api";
+
 import "./OurTeam.css";
+
 
 const OurTeam = () => {
 
-  const teamSliderRef = useRef(null);
+  const teamSliderRef =
+    useRef(null);
 
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [isDragging, setIsDragging] = useState(false);
+  const [teamMembers, setTeamMembers] =
+    useState([]);
 
-  const dragStartX = useRef(0);
-  const dragStartScrollLeft = useRef(0);
+  const [isDragging, setIsDragging] =
+    useState(false);
+
+  const dragStartX =
+    useRef(0);
+
+  const dragStartScrollLeft =
+    useRef(0);
+
+
+  // =====================================================
+  // PARSE SOCIAL LINKS
+  // =====================================================
+
+  const getSocialLinks = (member) => {
+
+    /*
+     * NEW CUSTOM SOCIAL LINKS
+     */
+
+    if (member.socialLinks) {
+
+      try {
+
+        const parsed =
+          JSON.parse(
+            member.socialLinks
+          );
+
+        if (
+          Array.isArray(parsed)
+        ) {
+
+          const validLinks =
+            parsed.filter(
+              (item) =>
+                item &&
+                item.platform &&
+                item.url &&
+                item.url.trim()
+            );
+
+          if (
+            validLinks.length > 0
+          ) {
+
+            return validLinks;
+          }
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Invalid social links:",
+          error
+        );
+      }
+    }
+
+
+    /*
+     * OLD INSTAGRAM / LINKEDIN
+     *
+     * This keeps old database records
+     * working.
+     */
+
+    const oldLinks = [];
+
+
+    if (member.instagram) {
+
+      oldLinks.push({
+        platform: "instagram",
+        url: member.instagram,
+      });
+
+    }
+
+
+    if (member.linkedin) {
+
+      oldLinks.push({
+        platform: "linkedin",
+        url: member.linkedin,
+      });
+
+    }
+
+
+    return oldLinks;
+  };
+
+
+  // =====================================================
+  // SOCIAL ICON
+  // =====================================================
+
+  const getSocialIcon = (platform) => {
+
+    switch (
+      platform
+        ?.toLowerCase()
+        .trim()
+    ) {
+
+      case "instagram":
+        return "◎";
+
+      case "linkedin":
+        return "in";
+
+      case "youtube":
+        return "▶";
+
+      case "facebook":
+        return "f";
+
+      case "twitter":
+      case "x":
+        return "𝕏";
+
+      case "website":
+        return "↗";
+
+      case "behance":
+        return "Be";
+
+      case "dribbble":
+        return "Dr";
+
+      default:
+        return "↗";
+    }
+  };
 
 
   // =====================================================
@@ -19,41 +160,50 @@ const OurTeam = () => {
 
   useEffect(() => {
 
-    const fetchTeamMembers = async () => {
+    const fetchTeamMembers =
+      async () => {
 
-      try {
+        try {
 
-        const response =
-          await api.get("/team-members");
+          const response =
+            await api.get(
+              "/team-members"
+            );
 
-        const data =
-          Array.isArray(response.data)
-            ? response.data
-            : [];
 
-        const sortedMembers =
-          [...data].sort(
-            (a, b) =>
-              (a.displayOrder ?? 0) -
-              (b.displayOrder ?? 0)
+          const data =
+            Array.isArray(
+              response.data
+            )
+              ? response.data
+              : [];
+
+
+          const sortedMembers =
+            [...data].sort(
+              (a, b) =>
+                (a.displayOrder ?? 0) -
+                (b.displayOrder ?? 0)
+            );
+
+
+          setTeamMembers(
+            sortedMembers
           );
 
-        setTeamMembers(
-          sortedMembers
-        );
+        } catch (error) {
 
-      } catch (error) {
+          console.error(
+            "Failed to load team members:",
+            error
+          );
 
-        console.error(
-          "Failed to load team members:",
-          error
-        );
+          setTeamMembers([]);
 
-        setTeamMembers([]);
+        }
 
-      }
+      };
 
-    };
 
     fetchTeamMembers();
 
@@ -70,24 +220,32 @@ const OurTeam = () => {
       return;
     }
 
+
     const slider =
       teamSliderRef.current;
+
 
     const cards =
       slider.querySelectorAll(
         ".public-team-card"
       );
 
+
     if (!cards.length) {
       return;
     }
 
+
     const currentScroll =
       slider.scrollLeft;
 
+
     let nextCard = null;
 
-    for (const card of cards) {
+
+    for (
+      const card of cards
+    ) {
 
       if (
         card.offsetLeft >
@@ -95,24 +253,29 @@ const OurTeam = () => {
       ) {
 
         nextCard = card;
+
         break;
-
       }
-
     }
+
 
     if (nextCard) {
 
       slider.scrollTo({
-        left: nextCard.offsetLeft,
-        behavior: "smooth",
+        left:
+          nextCard.offsetLeft,
+
+        behavior:
+          "smooth",
       });
 
     } else {
 
       slider.scrollTo({
         left: 0,
-        behavior: "smooth",
+
+        behavior:
+          "smooth",
       });
 
     }
@@ -129,8 +292,10 @@ const OurTeam = () => {
       return;
     }
 
+
     const slider =
       teamSliderRef.current;
+
 
     if (
       Math.abs(event.deltaY) >
@@ -138,6 +303,7 @@ const OurTeam = () => {
     ) {
 
       event.preventDefault();
+
 
       slider.scrollLeft +=
         event.deltaY * 1.2;
@@ -161,13 +327,17 @@ const OurTeam = () => {
       return;
     }
 
+
     const slider =
       teamSliderRef.current;
 
+
     setIsDragging(true);
+
 
     dragStartX.current =
       event.pageX;
+
 
     dragStartScrollLeft.current =
       slider.scrollLeft;
@@ -184,16 +354,20 @@ const OurTeam = () => {
       return;
     }
 
+
     if (!teamSliderRef.current) {
       return;
     }
 
+
     const slider =
       teamSliderRef.current;
+
 
     const distance =
       event.pageX -
       dragStartX.current;
+
 
     slider.scrollLeft =
       dragStartScrollLeft.current -
@@ -227,6 +401,7 @@ const OurTeam = () => {
 
     <section className="our-team">
 
+
       {/* =================================================
           LEFT INTRO
       ================================================= */}
@@ -237,13 +412,16 @@ const OurTeam = () => {
           OUR TEAM
         </p>
 
+
         <h2>
           THE PEOPLE
           <br />
           BEHIND THE WORK.
         </h2>
 
+
         <div className="our-team-line"></div>
+
 
         <p className="our-team-description">
           A team of creators, storytellers and thinkers
@@ -277,106 +455,122 @@ const OurTeam = () => {
           }
         >
 
-          {teamMembers.map((member) => (
 
-            <article
-              className="public-team-card"
-              key={member.id}
-            >
+          {teamMembers.map(
+            (member) => (
 
-              {/* =========================================
-                  IMAGE
-              ========================================= */}
-
-              <div className="public-team-card-image-wrapper">
-
-                <img
-                  src={member.imageUrl}
-                  alt={member.name}
-                  className="public-team-card-image"
-                  draggable="false"
-                />
-
-                <div className="public-team-card-image-overlay"></div>
-
-                <span className="public-team-card-number">
-                  {String(
-                    member.displayOrder ?? 0
-                  ).padStart(2, "0")}
-                </span>
-
-              </div>
+              <article
+                className="public-team-card"
+                key={member.id}
+              >
 
 
-              {/* =========================================
-                  CONTENT
-              ========================================= */}
+                {/* =========================================
+                    IMAGE
+                ========================================= */}
 
-              <div className="public-team-card-content">
+                <div className="public-team-card-image-wrapper">
 
-                <h3>
-                  {member.name}
-                </h3>
-
-                <p className="public-team-card-role">
-                  {member.role}
-                </p>
-
-                <p className="public-team-card-description">
-                  {member.description}
-                </p>
+                  <img
+                    src={member.imageUrl}
+                    alt={member.name}
+                    className="public-team-card-image"
+                    draggable="false"
+                  />
 
 
-                {/* =======================================
-                    SOCIAL
-                ======================================= */}
+                  <div className="public-team-card-image-overlay"></div>
 
-                {(member.instagram ||
-                  member.linkedin) && (
 
-                  <div className="public-team-card-social">
+                  <span className="public-team-card-number">
 
-                    {member.instagram && (
-
-                      <a
-                        href={member.instagram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${member.name} Instagram`}
-                        onClick={(event) =>
-                          event.stopPropagation()
-                        }
-                      >
-                        ◎
-                      </a>
-
+                    {String(
+                      member.displayOrder ?? 0
+                    ).padStart(
+                      2,
+                      "0"
                     )}
 
-                    {member.linkedin && (
+                  </span>
 
-                      <a
-                        href={member.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${member.name} LinkedIn`}
-                        onClick={(event) =>
-                          event.stopPropagation()
-                        }
-                      >
-                        in
-                      </a>
+                </div>
 
-                    )}
 
-                  </div>
+                {/* =========================================
+                    CONTENT
+                ========================================= */}
 
-                )}
+                <div className="public-team-card-content">
 
-              </div>
+                  <h3>
+                    {member.name}
+                  </h3>
 
-            </article>
 
-          ))}
+                  <p className="public-team-card-role">
+                    {member.role}
+                  </p>
+
+
+                  <p className="public-team-card-description">
+                    {member.description}
+                  </p>
+
+
+                  {/* =======================================
+                      SOCIAL
+                  ======================================= */}
+
+                  {getSocialLinks(
+                    member
+                  ).length > 0 && (
+
+                    <div className="public-team-card-social">
+
+                      {getSocialLinks(
+                        member
+                      ).map(
+                        (
+                          social,
+                          index
+                        ) => (
+
+                          <a
+                            key={
+                              `${social.platform}-${index}`
+                            }
+                            href={
+                              social.url
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={
+                              `${member.name} ${social.platform}`
+                            }
+                            onClick={(event) =>
+                              event.stopPropagation()
+                            }
+                          >
+
+                            {getSocialIcon(
+                              social.platform
+                            )}
+
+                          </a>
+
+                        )
+                      )}
+
+                    </div>
+
+                  )}
+
+                </div>
+
+              </article>
+
+            )
+          )}
 
         </div>
 
@@ -397,6 +591,7 @@ const OurTeam = () => {
             <span className="team-more-label">
               MORE
             </span>
+
 
             <span className="team-more-arrow">
               →
@@ -428,8 +623,8 @@ const OurTeam = () => {
       </div>
 
     </section>
-
   );
 };
+
 
 export default OurTeam;

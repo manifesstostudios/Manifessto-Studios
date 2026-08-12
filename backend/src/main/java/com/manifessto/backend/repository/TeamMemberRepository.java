@@ -8,5 +8,6 @@ import java.util.List;
 public interface TeamMemberRepository
         extends JpaRepository<TeamMember, Long> {
 
-    List<TeamMember> findAllByOrderByDisplayOrderAsc();
+    List<TeamMember>
+    findAllByOrderByDisplayOrderAsc();
 }

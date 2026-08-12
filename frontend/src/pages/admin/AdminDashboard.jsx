@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./AdminDashboard.css";
@@ -21,6 +21,172 @@ const AdminDashboard = () => {
 
   const [selectedService, setSelectedService] =
     useState(null);
+
+
+  // =====================================================
+  // DASHBOARD COUNTS
+  // =====================================================
+
+  const [counts, setCounts] = useState({
+    services: 0,
+    team: 0,
+    projects: 0,
+    reviews: 0,
+  });
+
+  const [countsLoading, setCountsLoading] =
+    useState(true);
+
+
+  // =====================================================
+  // FETCH DASHBOARD COUNTS
+  // =====================================================
+
+  useEffect(() => {
+
+    const fetchDashboardCounts = async () => {
+
+      try {
+
+        setCountsLoading(true);
+
+
+        const [
+          servicesResponse,
+          teamResponse,
+          projectsResponse,
+          reviewsResponse,
+        ] = await Promise.all([
+
+          fetch(
+            "http://localhost:8080/api/services"
+          ),
+
+          fetch(
+            "http://localhost:8080/api/team-members"
+          ),
+
+          fetch(
+            "http://localhost:8080/api/projects"
+          ),
+
+          fetch(
+            "http://localhost:8080/api/reviews"
+          ),
+
+        ]);
+
+
+        // =================================================
+        // CHECK RESPONSE
+        // =================================================
+
+        if (!servicesResponse.ok) {
+          throw new Error(
+            "Failed to fetch services"
+          );
+        }
+
+        if (!teamResponse.ok) {
+          throw new Error(
+            "Failed to fetch team members"
+          );
+        }
+
+        if (!projectsResponse.ok) {
+          throw new Error(
+            "Failed to fetch projects"
+          );
+        }
+
+        if (!reviewsResponse.ok) {
+          throw new Error(
+            "Failed to fetch reviews"
+          );
+        }
+
+
+        // =================================================
+        // CONVERT TO JSON
+        // =================================================
+
+        const [
+          services,
+          teamMembers,
+          projects,
+          reviews,
+        ] = await Promise.all([
+
+          servicesResponse.json(),
+
+          teamResponse.json(),
+
+          projectsResponse.json(),
+
+          reviewsResponse.json(),
+
+        ]);
+
+
+        // =================================================
+        // SET COUNTS
+        // =================================================
+
+        setCounts({
+
+          services:
+            Array.isArray(services)
+              ? services.length
+              : 0,
+
+          team:
+            Array.isArray(teamMembers)
+              ? teamMembers.length
+              : 0,
+
+          projects:
+            Array.isArray(projects)
+              ? projects.length
+              : 0,
+
+          reviews:
+            Array.isArray(reviews)
+              ? reviews.length
+              : 0,
+
+        });
+
+
+      } catch (error) {
+
+        console.error(
+          "Dashboard count error:",
+          error
+        );
+
+
+        // Keep counts at zero if request fails
+
+        setCounts({
+          services: 0,
+          team: 0,
+          projects: 0,
+          reviews: 0,
+        });
+
+
+      } finally {
+
+        setCountsLoading(false);
+
+      }
+
+    };
+
+
+    fetchDashboardCounts();
+
+  }, []);
 
 
   // =====================================================
@@ -100,11 +266,17 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
 
-    localStorage.removeItem("adminToken");
+    localStorage.removeItem(
+      "adminToken"
+    );
 
-    localStorage.removeItem("adminEmail");
+    localStorage.removeItem(
+      "adminEmail"
+    );
 
-    navigate("/admin/login");
+    navigate(
+      "/admin/login"
+    );
 
   };
 
@@ -302,6 +474,10 @@ const AdminDashboard = () => {
             <div className="admin-stat-grid">
 
 
+              {/* =================================================
+                  SERVICES COUNT
+              ================================================= */}
+
               <div className="admin-stat-card">
 
                 <span>
@@ -309,7 +485,9 @@ const AdminDashboard = () => {
                 </span>
 
                 <strong>
-                  —
+                  {countsLoading
+                    ? "..."
+                    : counts.services}
                 </strong>
 
                 <p>
@@ -319,6 +497,10 @@ const AdminDashboard = () => {
               </div>
 
 
+              {/* =================================================
+                  TEAM COUNT
+              ================================================= */}
+
               <div className="admin-stat-card">
 
                 <span>
@@ -326,7 +508,9 @@ const AdminDashboard = () => {
                 </span>
 
                 <strong>
-                  —
+                  {countsLoading
+                    ? "..."
+                    : counts.team}
                 </strong>
 
                 <p>
@@ -336,6 +520,10 @@ const AdminDashboard = () => {
               </div>
 
 
+              {/* =================================================
+                  PROJECTS COUNT
+              ================================================= */}
+
               <div className="admin-stat-card">
 
                 <span>
@@ -343,7 +531,9 @@ const AdminDashboard = () => {
                 </span>
 
                 <strong>
-                  —
+                  {countsLoading
+                    ? "..."
+                    : counts.projects}
                 </strong>
 
                 <p>
@@ -353,6 +543,10 @@ const AdminDashboard = () => {
               </div>
 
 
+              {/* =================================================
+                  REVIEWS COUNT
+              ================================================= */}
+
               <div className="admin-stat-card">
 
                 <span>
@@ -360,7 +554,9 @@ const AdminDashboard = () => {
                 </span>
 
                 <strong>
-                  —
+                  {countsLoading
+                    ? "..."
+                    : counts.reviews}
                 </strong>
 
                 <p>
@@ -368,6 +564,7 @@ const AdminDashboard = () => {
                 </p>
 
               </div>
+
 
             </div>
 
@@ -602,7 +799,7 @@ const AdminDashboard = () => {
 
 
         {/* =================================================
-            PROJECTS — NEW
+            PROJECTS
         ================================================= */}
 
         {activeSection === "Projects" && (
@@ -615,9 +812,12 @@ const AdminDashboard = () => {
         {/* =================================================
             REVIEWS
         ================================================= */}
-          {activeSection === "Reviews" && (
-            <ReviewsManagement />
-          )}
+
+        {activeSection === "Reviews" && (
+
+          <ReviewsManagement />
+
+        )}
 
       </main>
 

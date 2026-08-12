@@ -190,7 +190,9 @@
 
 .project-form {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 18px;
 }
 
@@ -259,6 +261,193 @@
 
 
 /* =====================================================
+   PROJECT IMAGE UPLOAD
+===================================================== */
+
+.project-image-upload {
+  width: 100%;
+}
+
+
+/* =====================================================
+   FILE INPUT
+===================================================== */
+
+.project-image-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-image-upload-row input[type="file"] {
+  display: none;
+}
+
+
+/* =====================================================
+   CHOOSE IMAGE BUTTON
+===================================================== */
+
+.project-image-select-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 18px;
+
+  color: #ffffff;
+
+  background: #151515;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.project-image-select-button:hover {
+  background: #1b1b1b;
+  border-color: rgba(255, 255, 255, 0.22);
+
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   IMAGE HELP
+===================================================== */
+
+.project-image-help {
+  margin: 9px 0 0;
+
+  color: #555555;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW
+===================================================== */
+
+.project-image-preview {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 14px;
+
+  padding: 10px;
+
+  background: #080808;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 6px;
+}
+
+.project-image-preview img {
+  width: 110px;
+  height: 75px;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 4px;
+}
+
+
+/* =====================================================
+   IMAGE PREVIEW INFO
+===================================================== */
+
+.project-image-preview-info {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.project-image-preview-info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-image-preview-info span {
+  color: #72d69a;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.project-image-preview-info small {
+  color: #555555;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: 9px;
+}
+
+
+/* =====================================================
+   REMOVE IMAGE
+===================================================== */
+
+.project-remove-image-button {
+  flex-shrink: 0;
+
+  padding: 7px 10px;
+
+  color: #ff8b8b;
+
+  background: rgba(255, 70, 70, 0.06);
+
+  border: 1px solid rgba(255, 70, 70, 0.2);
+  border-radius: 4px;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.project-remove-image-button:hover {
+  background: rgba(255, 70, 70, 0.12);
+
+  border-color: rgba(255, 70, 70, 0.35);
+}
+
+
+/* =====================================================
    OPTIONS
 ===================================================== */
 
@@ -267,6 +456,7 @@
 
   display: flex;
   align-items: center;
+
   gap: 24px;
 
   padding-top: 2px;
@@ -275,11 +465,13 @@
 .project-checkbox {
   display: inline-flex;
   align-items: center;
+
   gap: 8px;
 
   color: #aaaaaa;
 
   font-family: "Manrope", sans-serif !important;
+
   font-size: 11px;
 
   cursor: pointer;
@@ -306,6 +498,7 @@
 
   display: flex;
   justify-content: flex-end;
+
   gap: 10px;
 
   padding-top: 8px;
@@ -327,6 +520,7 @@
 
 .project-cancel-button {
   color: #aaaaaa;
+
   background: transparent;
 
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -334,6 +528,7 @@
 
 .project-save-button {
   color: #ffffff;
+
   background: #1683f7;
 
   border: 1px solid #1683f7;
@@ -341,6 +536,16 @@
 
 .project-cancel-button:hover {
   color: #ffffff;
+}
+
+.project-save-button:hover {
+  background: #0f72dc;
+}
+
+.project-save-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
 }
 
 
@@ -438,6 +643,7 @@
 .category-info {
   display: flex;
   align-items: center;
+
   gap: 12px;
 
   min-width: 0;
@@ -468,11 +674,13 @@
 
 .status-active {
   color: #72d69a;
+
   background: rgba(74, 201, 126, 0.1);
 }
 
 .status-inactive {
   color: #ff8b8b;
+
   background: rgba(255, 80, 80, 0.1);
 }
 
@@ -485,6 +693,7 @@
 .admin-project-actions {
   display: flex;
   align-items: center;
+
   gap: 7px;
 }
 
@@ -493,6 +702,7 @@
   padding: 7px 10px;
 
   color: #aaaaaa;
+
   background: #151515;
 
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -509,7 +719,9 @@
 .category-actions button:hover,
 .admin-project-actions button:hover {
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
+
+  border-color:
+    rgba(255, 255, 255, 0.2);
 }
 
 .category-actions .danger,
@@ -542,7 +754,9 @@
 
   padding: 15px 22px;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.05);
 }
 
 .admin-project-card:last-child {
@@ -562,7 +776,9 @@
 
   background: #080808;
 
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid
+    rgba(255, 255, 255, 0.07);
+
   border-radius: 5px;
 }
 
@@ -595,7 +811,9 @@
   font-weight: 700;
 
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
 }
 
@@ -609,12 +827,13 @@
 
 
 /* =====================================================
-   STATUS BADGES
+   STATUS
 ===================================================== */
 
 .admin-project-status {
   display: flex;
   align-items: center;
+
   gap: 6px;
 }
 
@@ -633,17 +852,35 @@
 
 .project-badge.featured {
   color: #1683f7;
-  background: rgba(22, 131, 247, 0.1);
+
+  background: rgba(
+    22,
+    131,
+    247,
+    0.1
+  );
 }
 
 .project-badge.active {
   color: #72d69a;
-  background: rgba(74, 201, 126, 0.1);
+
+  background: rgba(
+    74,
+    201,
+    126,
+    0.1
+  );
 }
 
 .project-badge.inactive {
   color: #ff8b8b;
-  background: rgba(255, 80, 80, 0.1);
+
+  background: rgba(
+    255,
+    80,
+    80,
+    0.1
+  );
 }
 
 
@@ -716,6 +953,7 @@
   padding: 9px 14px;
 
   color: #ffffff;
+
   background: #1683f7;
 
   border: none;
@@ -738,6 +976,7 @@
 .project-management input:disabled,
 .project-management select:disabled {
   opacity: 0.55;
+
   cursor: not-allowed;
 }
 
@@ -750,6 +989,7 @@
 
   .project-management-header {
     align-items: flex-start;
+
     flex-direction: column;
   }
 
@@ -773,6 +1013,7 @@
   .admin-project-status {
     display: none;
   }
+
 }
 
 
@@ -786,6 +1027,7 @@
     width: 100%;
 
     flex-direction: column;
+
     align-items: stretch;
   }
 
@@ -844,4 +1086,30 @@
   .admin-project-actions {
     grid-column: 2;
   }
+
+  /* IMAGE UPLOAD MOBILE */
+
+  .project-image-upload-row {
+    width: 100%;
+  }
+
+  .project-image-select-button {
+    width: 100%;
+  }
+
+  .project-image-preview {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .project-image-preview img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .project-image-preview-info {
+    width: 100%;
+  }
+
 }
