@@ -1,0 +1,671 @@
+/* =====================================================
+   PROJECT INQUIRY OVERLAY
+===================================================== */
+
+.project-inquiry-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  animation:
+    inquiryOverlayIn
+    0.3s
+    ease
+    both;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.project-inquiry-modal {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 560px;
+
+  max-height: calc(100vh - 50px);
+
+  padding: 45px;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  background:
+    #0c0c0c;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 30px 100px
+    rgba(0, 0, 0, 0.65);
+
+  animation:
+    inquiryModalIn
+    0.5s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.project-inquiry-close {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  color:
+    rgba(255, 255, 255, 0.7);
+
+  background:
+    rgba(255, 255, 255, 0.05);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 22px;
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.project-inquiry-close:hover {
+  color: #ffffff;
+
+  background: #1683f7;
+
+  border-color: #1683f7;
+
+  transform: rotate(90deg);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.project-inquiry-header {
+  padding-right: 40px;
+}
+
+
+.project-inquiry-eyebrow {
+  margin:
+    0
+    0
+    16px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  line-height: 1;
+}
+
+
+.project-inquiry-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size:
+    clamp(
+      38px,
+      6vw,
+      60px
+    );
+
+  font-weight: 700;
+
+  line-height: 0.95;
+
+  letter-spacing: -2.5px;
+
+  text-transform: uppercase;
+}
+
+
+.project-inquiry-header h2 span {
+  color: #1683f7;
+}
+
+
+.project-inquiry-description {
+  max-width: 400px;
+
+  margin:
+    20px
+    0
+    0;
+
+  color: #8f8f8f;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 400;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.project-inquiry-form {
+  margin-top: 35px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 23px;
+}
+
+
+/* =====================================================
+   FIELD
+===================================================== */
+
+.project-inquiry-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+
+.project-inquiry-field label {
+  color:
+    rgba(255, 255, 255, 0.55);
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =====================================================
+   INPUT + SELECT
+===================================================== */
+
+.project-inquiry-field input,
+.project-inquiry-field select {
+  width: 100%;
+
+  height: 48px;
+
+  padding:
+    0
+    14px;
+
+  box-sizing: border-box;
+
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  outline: none;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 12px;
+
+  font-weight: 400;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+.project-inquiry-field input::placeholder {
+  color:
+    rgba(255, 255, 255, 0.3);
+}
+
+
+.project-inquiry-field input:focus,
+.project-inquiry-field select:focus {
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  border-color:
+    rgba(22, 131, 247, 0.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(22, 131, 247, 0.08);
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.project-inquiry-field select {
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  cursor: pointer;
+
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 50%,
+      #888 50%
+    ),
+    linear-gradient(
+      135deg,
+      #888 50%,
+      transparent 50%
+    );
+
+  background-position:
+    calc(100% - 17px) 20px,
+    calc(100% - 12px) 20px;
+
+  background-size:
+    5px 5px,
+    5px 5px;
+
+  background-repeat: no-repeat;
+}
+
+
+.project-inquiry-field select option {
+  color: #ffffff;
+
+  background: #111111;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.project-inquiry-error {
+  margin:
+    -5px
+    0
+    0;
+
+  color: #ff6b6b;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+}
+
+
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
+
+.project-inquiry-submit {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-top: 5px;
+
+  padding:
+    0
+    18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  color: #ffffff;
+
+  background: #1683f7;
+
+  border:
+    1px solid
+    #1683f7;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.project-inquiry-submit::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: #ffffff;
+
+  transform:
+    translateX(-101%);
+
+  transition:
+    transform 0.4s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+
+.project-inquiry-submit:hover::before {
+  transform:
+    translateX(0);
+}
+
+
+.project-inquiry-submit:hover {
+  color: #080808;
+
+  transform:
+    translateY(-2px);
+}
+
+
+.project-inquiry-submit span {
+  position: relative;
+
+  z-index: 2;
+}
+
+
+.project-inquiry-submit-arrow {
+  font-size: 18px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.project-inquiry-submit:hover
+.project-inquiry-submit-arrow {
+  transform:
+    translateX(5px);
+}
+
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.project-inquiry-note {
+  margin:
+    18px
+    0
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.3);
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes inquiryOverlayIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes inquiryModalIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(30px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .project-inquiry-overlay {
+    padding: 15px;
+  }
+
+
+  .project-inquiry-modal {
+    max-height:
+      calc(100vh - 30px);
+
+    padding: 35px 25px;
+  }
+
+
+  .project-inquiry-close {
+    top: 15px;
+
+    right: 15px;
+
+    width: 34px;
+    height: 34px;
+  }
+
+
+  .project-inquiry-header {
+    padding-right: 35px;
+  }
+
+
+  .project-inquiry-header h2 {
+    font-size: 40px;
+
+    letter-spacing: -1.7px;
+  }
+
+
+  .project-inquiry-description {
+    font-size: 12px;
+  }
+
+
+  .project-inquiry-form {
+    margin-top: 28px;
+
+    gap: 19px;
+  }
+
+
+  .project-inquiry-field input,
+  .project-inquiry-field select {
+    height: 46px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .project-inquiry-modal {
+    padding:
+      30px
+      20px;
+  }
+
+
+  .project-inquiry-header h2 {
+    font-size: 35px;
+  }
+
+
+  .project-inquiry-description {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-inquiry-overlay,
+  .project-inquiry-modal,
+  .project-inquiry-submit,
+  .project-inquiry-close {
+
+    animation: none;
+
+    transition: none;
+  }
+
+}

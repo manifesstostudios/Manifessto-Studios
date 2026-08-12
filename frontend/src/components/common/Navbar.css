@@ -1,0 +1,699 @@
+/* =====================================================
+   MANIFESSTO STUDIOS
+   NAVBAR
+===================================================== */
+
+.navbar {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+
+  width: 100%;
+  height: 88px;
+
+  padding: 0 5.5%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  background: transparent;
+
+  font-family: "Manrope", sans-serif !important;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.navbar-logo {
+  width: 175px;
+
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  text-decoration: none;
+}
+
+.navbar-logo img {
+  width: 100%;
+  height: auto;
+
+  display: block;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.navbar-links {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: clamp(28px, 3.2vw, 52px);
+
+  white-space: nowrap;
+}
+
+.navbar-links a {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  color: #b5b5b5;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  text-transform: capitalize;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.3s ease;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   NAVIGATION UNDERLINE
+===================================================== */
+
+.navbar-links a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -9px;
+
+  width: 0;
+  height: 2px;
+
+  background: #ffffff;
+
+  border-radius: 10px;
+
+  transition:
+    width 0.3s ease;
+}
+
+.navbar-links a:hover::after,
+.navbar-links a.active::after {
+  width: 100%;
+}
+
+
+/* =====================================================
+   DESKTOP BOOKING BUTTON
+===================================================== */
+
+.navbar-booking {
+  height: 52px;
+
+  padding: 0 24px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  flex-shrink: 0;
+
+  color: #ffffff;
+
+  background: #1683f7;
+
+  border: 1px solid #1683f7;
+
+  border-radius: 6px;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  outline: none;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar-booking:hover {
+  background: #0d72dc;
+
+  border-color: #0d72dc;
+
+  box-shadow:
+    0 8px 25px
+    rgba(22, 131, 247, 0.25);
+
+  transform:
+    translateY(-1px);
+}
+
+.navbar-booking:focus-visible {
+  outline:
+    2px solid
+    rgba(255, 255, 255, 0.7);
+
+  outline-offset: 3px;
+}
+
+
+/* =====================================================
+   BOOKING ARROW
+===================================================== */
+
+.booking-arrow {
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.navbar-booking:hover
+.booking-arrow {
+  transform:
+    translateX(4px);
+}
+
+
+/* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+
+.menu-button {
+  display: none;
+
+  width: 46px;
+  height: 46px;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 0;
+
+  background: transparent;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+.menu-button span {
+  width: 20px;
+  height: 2px;
+
+  display: block;
+
+  background: #ffffff;
+
+  border-radius: 10px;
+}
+
+
+/* =====================================================
+   MOBILE MENU OVERLAY
+===================================================== */
+
+.menu-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1500;
+
+  background:
+    rgba(0, 0, 0, 0.65);
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+.mobile-menu {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  z-index: 2000;
+
+  width:
+    min(380px, 88vw);
+
+  height: 100vh;
+
+  padding: 28px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  background: #080808;
+
+  border-left:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  transform:
+    translateX(100%);
+
+  transition:
+    transform
+    0.45s
+    cubic-bezier(
+      0.77,
+      0,
+      0.18,
+      1
+    );
+}
+
+.mobile-menu.open {
+  transform:
+    translateX(0);
+}
+
+
+/* =====================================================
+   MOBILE HEADER
+===================================================== */
+
+.mobile-menu-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 28px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-header img {
+  width: 145px;
+  height: auto;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  background: transparent;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+
+  border-radius: 6px;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 28px;
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.close-button:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border-color:
+    rgba(255, 255, 255, 0.4);
+
+  transform:
+    rotate(90deg);
+}
+
+
+/* =====================================================
+   MOBILE LINKS
+===================================================== */
+
+.mobile-menu-links {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-top: 35px;
+}
+
+.mobile-menu-links a {
+  padding: 18px 0;
+
+  color: #999999;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 20px;
+
+  font-weight: 500;
+
+  line-height: 1.2;
+
+  text-decoration: none;
+
+  text-transform: capitalize;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.3s ease,
+    padding-left 0.3s ease;
+}
+
+.mobile-menu-links a:hover,
+.mobile-menu-links a.active {
+  color: #ffffff;
+}
+
+.mobile-menu-links a:hover {
+  padding-left: 8px;
+}
+
+
+/* =====================================================
+   MOBILE BOOKING BUTTON
+===================================================== */
+
+.mobile-booking {
+  width: 100%;
+  height: 54px;
+
+  margin-top: auto;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  color: #ffffff;
+
+  background: #1683f7;
+
+  border:
+    1px solid
+    #1683f7;
+
+  border-radius: 6px;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  outline: none;
+
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.mobile-booking:hover {
+  background: #0d72dc;
+
+  border-color: #0d72dc;
+
+  box-shadow:
+    0 8px 25px
+    rgba(22, 131, 247, 0.25);
+
+  transform:
+    translateY(-1px);
+}
+
+.mobile-booking:focus-visible {
+  outline:
+    2px solid
+    rgba(255, 255, 255, 0.7);
+
+  outline-offset: 3px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    height: 80px;
+
+    padding:
+      0
+      4%;
+  }
+
+
+  .navbar-logo {
+    width: 155px;
+  }
+
+
+  .navbar-links {
+    gap: 22px;
+  }
+
+
+  .navbar-links a {
+    font-size: 13px;
+  }
+
+
+  .navbar-booking {
+    height: 48px;
+
+    padding:
+      0
+      18px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .navbar {
+    height: 72px;
+
+    padding:
+      0
+      18px;
+  }
+
+
+  .navbar-logo {
+    width: 140px;
+  }
+
+
+  .navbar-links,
+  .navbar-booking {
+    display: none;
+  }
+
+
+  .menu-button {
+    display: flex;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .navbar {
+    padding:
+      0
+      14px;
+  }
+
+
+  .navbar-logo {
+    width: 125px;
+  }
+
+
+  .menu-button {
+    width: 42px;
+
+    height: 42px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navbar-booking,
+  .booking-arrow,
+  .mobile-booking,
+  .close-button,
+  .menu-overlay,
+  .mobile-menu,
+  .navbar-links a,
+  .navbar-links a::after {
+
+    transition: none;
+  }
+
+}

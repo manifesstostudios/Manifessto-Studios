@@ -1,0 +1,290 @@
+/* =====================================================
+   TRUSTED BY
+===================================================== */
+
+.trusted-section {
+  width: 100%;
+
+  background: #080808;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+
+  font-family: "Manrope", sans-serif !important;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.trusted-container {
+  width: 100%;
+  min-height: 90px;
+
+  padding: 0 6%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 55px;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.trusted-label {
+  flex-shrink: 0;
+
+  color: #666666;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   CAROUSEL
+===================================================== */
+
+.trusted-carousel {
+  flex: 1;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  user-select: none;
+}
+
+
+/* =====================================================
+   TRACK
+===================================================== */
+
+.trusted-track {
+  width: max-content;
+  min-height: 90px;
+
+  display: flex;
+  align-items: center;
+
+  gap: clamp(65px, 7vw, 110px);
+
+  padding-right: clamp(65px, 7vw, 110px);
+
+  animation: trustedLoop 28s linear infinite;
+}
+
+
+/* =====================================================
+   LOOP ANIMATION
+===================================================== */
+
+@keyframes trustedLoop {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* =====================================================
+   BRAND NAMES
+===================================================== */
+
+.trusted-logo {
+  flex-shrink: 0;
+
+  color: #e8e8e8;
+
+  font-family: "Manrope", sans-serif !important;
+
+  font-size: clamp(18px, 2vw, 25px);
+
+  font-weight: 800;
+
+  letter-spacing: -0.8px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+
+  opacity: 0.9;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+
+/* =====================================================
+   BRAND HOVER
+===================================================== */
+
+.trusted-logo:hover {
+  color: #ffffff;
+
+  opacity: 1;
+
+  transform: scale(1.08);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .trusted-container {
+    padding: 0 4%;
+
+    gap: 35px;
+  }
+
+
+  .trusted-track {
+    gap: 60px;
+
+    padding-right: 60px;
+
+    animation-duration: 24s;
+  }
+
+
+  .trusted-logo {
+    font-size: 21px;
+
+    letter-spacing: -0.6px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .trusted-container {
+    min-height: 90px;
+
+    padding: 0 20px;
+
+    display: block;
+  }
+
+
+  /* LABEL */
+
+  .trusted-label {
+    display: block;
+
+    padding-top: 15px;
+
+    font-size: 9px;
+
+    letter-spacing: 1.3px;
+  }
+
+
+  /* CAROUSEL */
+
+  .trusted-carousel {
+    width: 100%;
+
+    margin-top: 0;
+  }
+
+
+  /* TRACK */
+
+  .trusted-track {
+    min-height: 62px;
+
+    gap: 55px;
+
+    padding-right: 55px;
+
+    animation-duration: 20s;
+  }
+
+
+  /* BRAND */
+
+  .trusted-logo {
+    font-size: 19px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .trusted-container {
+    padding: 0 16px;
+  }
+
+
+  .trusted-track {
+    gap: 45px;
+
+    padding-right: 45px;
+
+    animation-duration: 18s;
+  }
+
+
+  .trusted-logo {
+    font-size: 18px;
+
+    letter-spacing: -0.4px;
+  }
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .trusted-track {
+    animation: none;
+  }
+
+  .trusted-logo {
+    transition: none;
+  }
+}

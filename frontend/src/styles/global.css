@@ -1,0 +1,497 @@
+/* =====================================================
+   MANIFESSTO STUDIOS
+   GLOBAL CSS
+===================================================== */
+
+/* =========================
+   LOCAL FONTS
+========================= */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../assets/fonts/Manrope-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+
+:root {
+  --font-main: "Manrope", sans-serif;
+
+  --bg-primary: #050505;
+  --bg-secondary: #080808;
+
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --text-muted: #707070;
+
+  --accent: #1683f7;
+
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.15);
+
+  --container-width: 1400px;
+  --container-width-small: 88%;
+
+  --transition: 0.35s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family: var(--font-main);
+
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================
+   IMPORTANT GLOBAL FIX
+========================= */
+
+body,
+button,
+input,
+textarea,
+select,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+li,
+label {
+  font-family: var(--font-main) !important;
+
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+/* =========================
+   ROOT CONTAINER
+========================= */
+
+#root {
+  width: 100%;
+  min-width: 0;
+}
+
+.main-container {
+  width: 100%;
+  min-height: 100vh;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-family: var(--font-main) !important;
+
+  font-weight: 700;
+
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+/* =========================
+   PARAGRAPHS
+========================= */
+
+p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-family: var(--font-main) !important;
+
+  font-weight: 400;
+
+  line-height: 1.6;
+
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+  color: inherit;
+
+  text-decoration: none;
+
+  font-family: var(--font-main) !important;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+  border: none;
+  outline: none;
+
+  font-family: var(--font-main) !important;
+
+  cursor: pointer;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+textarea,
+select {
+  font-family: var(--font-main) !important;
+}
+
+/* =========================
+   IMAGES
+========================= */
+
+img {
+  max-width: 100%;
+  height: auto;
+
+  display: block;
+
+  vertical-align: middle;
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+video {
+  max-width: 100%;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section {
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================
+   GLOBAL CONTAINER
+========================= */
+
+.container {
+  width: var(--container-width-small);
+
+  max-width: var(--container-width);
+
+  margin: 0 auto;
+}
+
+/* =========================
+   EYEBROW
+========================= */
+
+.eyebrow,
+[class$="-eyebrow"] {
+  font-family: var(--font-main) !important;
+
+  color: var(--accent);
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.7px;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+
+  word-break: normal;
+}
+
+/* =========================
+   DISPLAY TEXT
+========================= */
+
+.display-text {
+  font-family: var(--font-main) !important;
+
+  color: var(--text-primary);
+
+  font-size: clamp(28px, 4vw, 55px);
+
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  letter-spacing: -1.5px;
+}
+
+/* =========================
+   SCRIPT TEXT
+========================= */
+
+.script-text {
+  font-family: var(--font-main) !important;
+
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+/* =========================
+   BUTTON TYPOGRAPHY
+========================= */
+
+.cta-button,
+[class$="-button"],
+[class*="-btn"],
+[class*="booking"] {
+  font-family: var(--font-main) !important;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   PAGE REVEAL
+========================= */
+
+.page-reveal {
+  min-width: 0;
+
+  animation:
+    pageReveal
+    0.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes pageReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   NAVBAR ANIMATION
+========================= */
+
+.navbar {
+  animation:
+    navbarReveal
+    0.8s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.05s
+    both;
+}
+
+@keyframes navbarReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   PAGE HEADING ANIMATION
+========================= */
+
+.page-reveal h1,
+.page-reveal h2 {
+  animation:
+    headingReveal
+    0.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.12s
+    both;
+}
+
+@keyframes headingReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   PAGE IMAGE ANIMATION
+========================= */
+
+.page-reveal img {
+  animation:
+    imageReveal
+    1s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    0.18s
+    both;
+}
+
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.025);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================
+   SELECTION
+========================= */
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252525;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 850px) {
+  :root {
+    --container-width-small: 92%;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  :root {
+    --container-width-small: calc(100% - 32px);
+  }
+
+  .display-text {
+    font-size: clamp(
+      27px,
+      8vw,
+      42px
+    );
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+  :root {
+    --container-width-small: calc(100% - 28px);
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-reveal,
+  .page-reveal h1,
+  .page-reveal h2,
+  .page-reveal img,
+  .navbar {
+    animation: none !important;
+  }
+}

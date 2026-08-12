@@ -1,0 +1,657 @@
+/* =====================================================
+   PORTFOLIO CARD SECTION
+===================================================== */
+
+.portfolio-card-section {
+  width: 88%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 50px 0 120px;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.portfolio-card {
+  position: relative;
+
+  width: 100%;
+  min-height: 430px;
+
+  padding: 60px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  background: #0b0b0b;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+
+  isolation: isolate;
+
+  transition:
+    transform 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+
+/* =====================================================
+   CARD HOVER
+===================================================== */
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(22, 131, 247, 0.4);
+
+  box-shadow:
+    0 25px 70px
+    rgba(0, 0, 0, 0.45);
+}
+
+
+/* =====================================================
+   BACKGROUND IMAGE WRAPPER
+===================================================== */
+
+.portfolio-card-image-wrapper {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   BACKGROUND IMAGE
+===================================================== */
+
+.portfolio-card-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  filter:
+    brightness(1.5)
+    contrast(1.08)
+    saturate(1);
+
+  transform: scale(1.02);
+
+  transition:
+    transform 0.9s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+    filter 0.7s ease;
+}
+
+
+/* =====================================================
+   IMAGE HOVER
+===================================================== */
+
+.portfolio-card:hover
+.portfolio-card-image {
+  transform: scale(1.08);
+
+  filter:
+    brightness(0.68)
+    contrast(1.08)
+    saturate(1);
+}
+
+
+/* =====================================================
+   IMAGE OVERLAY
+===================================================== */
+
+.portfolio-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 5, 0.96) 0%,
+      rgba(5, 5, 5, 0.86) 28%,
+      rgba(5, 5, 5, 0.58) 52%,
+      rgba(5, 5, 5, 0.25) 78%,
+      rgba(5, 5, 5, 0.12) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.15) 0%,
+      rgba(5, 5, 5, 0.7) 100%
+    );
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.portfolio-card-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: 65%;
+
+  max-width: 720px;
+}
+
+
+/* =====================================================
+   SMALL LABEL
+===================================================== */
+
+.portfolio-card-content p {
+  margin:
+    0
+    0
+    16px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   MAIN HEADING
+===================================================== */
+
+.portfolio-card-content h2 {
+  margin:
+    0
+    0
+    18px;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size:
+    clamp(
+      38px,
+      5vw,
+      70px
+    );
+
+  font-weight: 700;
+
+  line-height: 0.95;
+
+  letter-spacing: -2.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.portfolio-card-content > span {
+  display: block;
+
+  margin:
+    0
+    0
+    30px;
+
+  color:
+    rgba(255, 255, 255, 0.68);
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 13px;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.portfolio-card-button {
+  position: relative;
+
+  width: fit-content;
+
+  min-width: 165px;
+
+  padding:
+    13px
+    18px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  box-sizing: border-box;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.25);
+
+  background:
+    rgba(0, 0, 0, 0.2);
+
+  backdrop-filter: blur(6px);
+
+  -webkit-backdrop-filter: blur(6px);
+
+  overflow: hidden;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+
+/* =====================================================
+   BUTTON HOVER BACKGROUND
+===================================================== */
+
+.portfolio-card-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  background: #1683f7;
+
+  transform: translateX(-101%);
+
+  transition:
+    transform 0.4s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+
+.portfolio-card-button:hover::before {
+  transform: translateX(0);
+}
+
+
+.portfolio-card-button:hover {
+  border-color: #1683f7;
+
+  transform: translateY(-3px);
+}
+
+
+/* =====================================================
+   BUTTON ARROW
+===================================================== */
+
+.portfolio-card-arrow {
+  display: inline-block;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.35s ease;
+}
+
+
+.portfolio-card-button:hover
+.portfolio-card-arrow {
+  transform: translateX(5px);
+}
+
+
+/* =====================================================
+   CARD CORNER NUMBER
+===================================================== */
+
+.portfolio-card-corner {
+  position: absolute;
+
+  top: 25px;
+
+  right: 28px;
+
+  z-index: 4;
+
+  color:
+    rgba(255, 255, 255, 0.45);
+
+  font-family:
+    "Manrope",
+    sans-serif !important;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =====================================================
+   TOP BLUE ACCENT
+===================================================== */
+
+.portfolio-card::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  z-index: 5;
+
+  width: 0;
+
+  height: 2px;
+
+  background: #1683f7;
+
+  transition:
+    width 0.55s
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
+}
+
+
+.portfolio-card:hover::after {
+  width: 100%;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .portfolio-card-section {
+    width: 92%;
+
+    padding:
+      45px
+      0
+      90px;
+  }
+
+
+  .portfolio-card {
+    min-height: 420px;
+
+    padding: 45px;
+  }
+
+
+  .portfolio-card-content {
+    width: 72%;
+  }
+
+
+  .portfolio-card-content h2 {
+    font-size:
+      clamp(
+        36px,
+        6vw,
+        58px
+      );
+
+    letter-spacing: -2px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .portfolio-card-section {
+    width:
+      calc(100% - 32px);
+
+    padding:
+      35px
+      0
+      80px;
+  }
+
+
+  .portfolio-card {
+    min-height: 430px;
+
+    padding: 30px;
+
+    align-items: flex-end;
+  }
+
+
+  /* Mobile overlay */
+
+  .portfolio-card-overlay {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(5, 5, 5, 0.96) 0%,
+        rgba(5, 5, 5, 0.76) 48%,
+        rgba(5, 5, 5, 0.28) 100%
+      );
+  }
+
+
+  .portfolio-card-image {
+    object-position: center;
+  }
+
+
+  /* Content */
+
+  .portfolio-card-content {
+    width: 100%;
+
+    max-width: none;
+  }
+
+
+  .portfolio-card-content p {
+    margin-bottom: 13px;
+
+    font-size: 8px;
+
+    letter-spacing: 1.7px;
+  }
+
+
+  .portfolio-card-content h2 {
+    margin-bottom: 15px;
+
+    font-size: 38px;
+
+    line-height: 0.96;
+
+    letter-spacing: -1.5px;
+  }
+
+
+  .portfolio-card-content > span {
+    margin-bottom: 24px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+  }
+
+
+  .portfolio-card-button {
+    min-width: 155px;
+
+    padding:
+      13px
+      15px;
+
+    font-size: 10px;
+  }
+
+
+  .portfolio-card-corner {
+    top: 20px;
+
+    right: 20px;
+
+    font-size: 7px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .portfolio-card-section {
+    width:
+      calc(100% - 28px);
+  }
+
+
+  .portfolio-card {
+    min-height: 410px;
+
+    padding: 25px;
+  }
+
+
+  .portfolio-card-content h2 {
+    font-size: 34px;
+
+    letter-spacing: -1.3px;
+  }
+
+
+  .portfolio-card-content > span {
+    font-size: 10px;
+  }
+
+
+  .portfolio-card-button {
+    min-width: 145px;
+
+    padding:
+      12px
+      14px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .portfolio-card,
+  .portfolio-card-image,
+  .portfolio-card-button,
+  .portfolio-card-arrow,
+  .portfolio-card::after {
+
+    transition: none;
+  }
+
+}

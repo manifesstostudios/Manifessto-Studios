@@ -1,0 +1,346 @@
+/* =====================================================
+   PORTFOLIO INTRO
+===================================================== */
+
+.portfolio-intro {
+  position: relative;
+
+  width: 88%;
+
+  max-width: 1400px;
+
+  min-height: 680px;
+
+  margin: 0 auto;
+
+  padding:
+    20px
+    0
+    80px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.portfolio-intro-content {
+  max-width: 900px;
+
+  animation:
+    portfolioIntroReveal
+    1s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+
+/* =====================================================
+   EYEBROW
+===================================================== */
+
+.portfolio-intro-eyebrow {
+  margin:
+    0
+    0
+    22px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.portfolio-intro h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size:
+    clamp(
+      64px,
+      9vw,
+      125px
+    );
+
+  font-weight: 700;
+
+  line-height: 0.9;
+
+  letter-spacing: -5px;
+
+  text-transform: uppercase;
+}
+
+
+.portfolio-intro h1 span {
+  color: #1683f7;
+}
+
+
+/* =====================================================
+   LINE
+===================================================== */
+
+.portfolio-intro-line {
+  width: 55px;
+
+  height: 2px;
+
+  margin:
+    30px
+    0
+    25px;
+
+  background: #1683f7;
+
+  transition:
+    width 0.5s ease;
+}
+
+
+.portfolio-intro-content:hover
+.portfolio-intro-line {
+  width: 100px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.portfolio-intro-description {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: #a0a0a0;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  line-height: 1.65;
+}
+
+
+/* =====================================================
+   META
+===================================================== */
+
+.portfolio-intro-meta {
+  position: absolute;
+
+  left: 0;
+
+  bottom: 45px;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+}
+
+
+.portfolio-intro-meta span {
+  color:
+    rgba(255, 255, 255, 0.4);
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes portfolioIntroReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .portfolio-intro {
+    width: 92%;
+
+    min-height: 600px;
+
+    padding-top: 160px;
+  }
+
+
+  .portfolio-intro h1 {
+    font-size:
+      clamp(
+        55px,
+        10vw,
+        90px
+      );
+
+    letter-spacing:
+      -3.5px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .portfolio-intro {
+    width:
+      calc(100% - 32px);
+
+    min-height: 570px;
+
+    padding:
+      145px
+      0
+      75px;
+  }
+
+
+  .portfolio-intro-eyebrow {
+    font-size: 9px;
+
+    margin-bottom: 17px;
+  }
+
+
+  .portfolio-intro h1 {
+    font-size:
+      clamp(
+        50px,
+        15vw,
+        75px
+      );
+
+    line-height: 0.94;
+
+    letter-spacing:
+      -2.5px;
+  }
+
+
+  .portfolio-intro-line {
+    margin:
+      24px
+      0
+      20px;
+  }
+
+
+  .portfolio-intro-description {
+    max-width: 100%;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  .portfolio-intro-meta {
+    bottom: 25px;
+  }
+
+
+  .portfolio-intro-meta span {
+    font-size: 7px;
+
+    letter-spacing: 1px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .portfolio-intro-content,
+  .portfolio-intro-line {
+
+    animation: none;
+
+    transition: none;
+  }
+
+}

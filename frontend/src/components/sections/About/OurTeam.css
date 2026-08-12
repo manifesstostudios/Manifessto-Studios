@@ -1,0 +1,894 @@
+/* =========================================================
+   OUR TEAM
+========================================================= */
+
+.our-team {
+  width: 100%;
+
+  padding: 80px 0 90px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(22, 131, 247, 0.035),
+      transparent 35%
+    ),
+    #080808;
+
+  color: #ffffff;
+
+  overflow: hidden;
+
+  display: grid;
+
+  grid-template-columns:
+    30%
+    70%;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   LEFT INTRO
+========================================================= */
+
+.our-team-intro {
+  padding-left:
+    max(
+      6%,
+      calc(
+        (100vw - 1400px) / 2
+      )
+    );
+
+  padding-right: 45px;
+
+  padding-top: 8px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.our-team-eyebrow {
+  margin:
+    0
+    0
+    17px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 2.2px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.our-team-intro h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size:
+    clamp(
+      36px,
+      3.5vw,
+      52px
+    );
+
+  font-weight: 700;
+
+  line-height: 0.97;
+
+  letter-spacing: -2px;
+}
+
+
+/* =========================================================
+   BLUE LINE
+========================================================= */
+
+.our-team-line {
+  width: 45px;
+
+  height: 2px;
+
+  margin:
+    25px
+    0
+    25px;
+
+  background: #1683f7;
+
+  transition:
+    width 0.45s ease;
+}
+
+.our-team-intro:hover
+.our-team-line {
+  width: 80px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.our-team-description {
+  max-width: 310px;
+
+  margin: 0;
+
+  color: #858585;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   SLIDER AREA
+========================================================= */
+
+.our-team-slider-area {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   HORIZONTAL SLIDER
+========================================================= */
+
+.our-team-slider {
+  width: 100%;
+
+  display: flex;
+
+  gap: 22px;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  padding:
+    0
+    125px
+    25px
+    0;
+
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
+
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+
+  overscroll-behavior-x: contain;
+
+  touch-action: pan-x;
+
+  cursor: grab;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.our-team-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.our-team-slider.is-dragging {
+  cursor: grabbing;
+
+  scroll-behavior: auto;
+
+  scroll-snap-type: none;
+}
+
+
+/* =========================================================
+   PUBLIC TEAM CARD
+========================================================= */
+
+.public-team-card {
+  position: relative;
+
+  display: block;
+
+  flex:
+    0 0
+    350px;
+
+  width: 350px;
+
+  min-width: 350px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.012)
+    );
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.075);
+
+  border-radius: 3px;
+
+  overflow: hidden;
+
+  scroll-snap-align: start;
+
+  transform: translateY(0);
+
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.public-team-card:hover {
+  transform:
+    translateY(-7px);
+
+  border-color:
+    rgba(22, 131, 247, 0.45);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   IMAGE WRAPPER
+========================================================= */
+
+.public-team-card-image-wrapper {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  height: auto;
+
+  overflow: hidden;
+
+  background: #111111;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.public-team-card-image {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position:
+    center 20%;
+
+  filter:
+    grayscale(12%)
+    contrast(1.03);
+
+  transform:
+    scale(1);
+
+  transition:
+    transform 0.8s
+      cubic-bezier(
+        0.2,
+        0.7,
+        0.2,
+        1
+      ),
+    filter 0.6s ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+========================================================= */
+
+.public-team-card:hover
+.public-team-card-image {
+  transform:
+    scale(1.07);
+
+  filter:
+    grayscale(0%)
+    contrast(1.05);
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
+
+.public-team-card-image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0)
+      45%,
+
+      rgba(0, 0, 0, 0.05)
+      65%,
+
+      rgba(0, 0, 0, 0.65)
+      100%
+    );
+}
+
+
+/* =========================================================
+   IMAGE NUMBER
+========================================================= */
+
+.public-team-card-number {
+  position: absolute;
+
+  left: 18px;
+
+  bottom: 15px;
+
+  color:
+    rgba(255, 255, 255, 0.7);
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.public-team-card-content {
+  display: block;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding:
+    23px
+    25px
+    25px;
+}
+
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.public-team-card-content h3 {
+  margin:
+    0
+    0
+    7px;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+.public-team-card-role {
+  margin:
+    0
+    0
+    14px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.2px;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.public-team-card-description {
+  max-width: 275px;
+
+  margin: 0;
+
+  color: #888888;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   SOCIAL
+========================================================= */
+
+.public-team-card-social {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+.public-team-card-social a {
+  width: 27px;
+
+  height: 27px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  border-radius: 50%;
+
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.public-team-card-social a:hover {
+  color: #ffffff;
+
+  background:
+    rgba(22, 131, 247, 0.15);
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* =========================================================
+   MORE BUTTON
+========================================================= */
+
+.team-more-button {
+  position: absolute;
+
+  width: 58px;
+
+  height: 58px;
+
+  right: 10px;
+
+  top: 43%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.15);
+
+  border-radius: 50%;
+
+  background:
+    rgba(8, 8, 8, 0.9);
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.team-more-button:hover {
+  background: #1683f7;
+
+  border-color: #1683f7;
+
+  transform:
+    translateX(3px);
+}
+
+.team-more-label {
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 6px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.team-more-arrow {
+  font-size: 18px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   SCROLL HINT
+========================================================= */
+
+.team-scroll-hint {
+  position: absolute;
+
+  left: 0;
+
+  bottom: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #555555;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 7px;
+
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.team-scroll-hint-line {
+  width: 55px;
+
+  height: 1px;
+
+  background: #333333;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .our-team {
+    grid-template-columns:
+      32%
+      68%;
+  }
+
+  .our-team-intro {
+    padding-right: 30px;
+  }
+
+  .public-team-card {
+    flex:
+      0 0
+      320px;
+
+    width: 320px;
+
+    min-width: 320px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .our-team {
+    display: block;
+
+    padding:
+      70px
+      0
+      80px;
+  }
+
+  .our-team-intro {
+    width: 100%;
+
+    padding:
+      0
+      5vw;
+
+    margin-bottom: 45px;
+  }
+
+  .our-team-description {
+    max-width: 420px;
+  }
+
+  .our-team-slider-area {
+    width: 100%;
+  }
+
+  .our-team-slider {
+    gap: 18px;
+
+    padding:
+      0
+      65px
+      25px
+      5vw;
+  }
+
+  .public-team-card {
+    flex:
+      0 0
+      calc(100vw - 65px);
+
+    width:
+      calc(100vw - 65px);
+
+    min-width:
+      calc(100vw - 65px);
+  }
+
+  .public-team-card-image-wrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .public-team-card-content {
+    padding:
+      20px
+      20px
+      22px;
+  }
+
+  .public-team-card-content h3 {
+    font-size: 17px;
+  }
+
+  .public-team-card-role {
+    font-size: 8px;
+  }
+
+  .public-team-card-description {
+    font-size: 14px;
+
+    line-height: 1.55;
+  }
+
+  .team-more-button {
+    width: 54px;
+
+    height: 54px;
+
+    right: 9px;
+
+    top: 43%;
+  }
+
+  .team-more-label {
+    font-size: 6px;
+  }
+
+  .team-more-arrow {
+    font-size: 16px;
+  }
+
+  .team-scroll-hint {
+    left: 16px;
+
+    bottom: 0;
+
+    font-size: 6px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .our-team-intro {
+    width:
+      calc(100% - 28px);
+
+    padding-left: 14px;
+
+    padding-right: 14px;
+  }
+
+  .our-team-intro h2 {
+    font-size: 31px;
+  }
+
+  .our-team-description {
+    font-size: 14px;
+  }
+
+  .our-team-slider {
+    padding-left: 14px;
+
+    padding-right: 60px;
+  }
+
+  .public-team-card {
+    flex:
+      0 0
+      calc(100vw - 55px);
+
+    width:
+      calc(100vw - 55px);
+
+    min-width:
+      calc(100vw - 55px);
+  }
+
+  .public-team-card-content {
+    padding:
+      19px
+      19px
+      21px;
+  }
+
+  .public-team-card-content h3 {
+    font-size: 16px;
+  }
+
+  .team-more-button {
+    width: 48px;
+
+    height: 48px;
+
+    right: 7px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+
+  .our-team-slider {
+    scroll-behavior: auto;
+  }
+
+  .public-team-card,
+  .public-team-card-image,
+  .team-more-button,
+  .public-team-card-social a {
+    transition: none;
+  }
+}

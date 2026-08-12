@@ -1,0 +1,917 @@
+/* =====================================================
+   ABOUT INTRO
+===================================================== */
+
+.about-intro {
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  background: #080808;
+
+  color: #ffffff;
+
+  overflow: hidden;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+}
+
+
+/* =====================================================
+   MAIN INTRO
+===================================================== */
+
+.about-intro-main {
+  width: 88%;
+
+  max-width: 1400px;
+
+  min-height: 560px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    42%
+    58%;
+
+  align-items: stretch;
+}
+
+
+/* =====================================================
+   LEFT CONTENT
+===================================================== */
+
+.about-intro-content {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: flex-start;
+
+  padding:
+    75px
+    55px
+    70px
+    0;
+
+  box-sizing: border-box;
+
+  animation:
+    aboutIntroContentReveal
+    0.9s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+
+/* =====================================================
+   EYEBROW
+===================================================== */
+
+.about-intro-eyebrow {
+  margin:
+    0
+    0
+    20px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   MAIN HEADING
+===================================================== */
+
+.about-intro-content h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size:
+    clamp(
+      48px,
+      5vw,
+      82px
+    );
+
+  font-weight: 700;
+
+  line-height: 1.02;
+
+  letter-spacing: -2.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   BLUE LINE
+===================================================== */
+
+.about-intro-line {
+  width: 42px;
+
+  height: 2px;
+
+  margin:
+    24px
+    0
+    20px;
+
+  background: #1683f7;
+
+  transition:
+    width 0.4s ease;
+}
+
+.about-intro-content:hover
+.about-intro-line {
+  width: 72px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.about-intro-text {
+  max-width: 520px;
+
+  margin:
+    0
+    0
+    16px;
+
+  color: #d0d0d0;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 18px;
+
+  font-weight: 400;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   HIGHLIGHT
+===================================================== */
+
+.about-intro-highlight {
+  margin:
+    8px
+    0
+    0;
+
+  color: #d5d5d5;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+
+  letter-spacing: 0;
+}
+
+
+/* =====================================================
+   IMAGE WRAPPER
+===================================================== */
+
+.about-intro-image-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 560px;
+
+  overflow: hidden;
+
+  animation:
+    aboutIntroImageReveal
+    1s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    0.15s
+    both;
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.about-intro-image {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  filter:
+    brightness(0.78);
+
+  transform:
+    scale(1.02);
+
+  transition:
+    transform 0.8s ease,
+    filter 0.8s ease;
+}
+
+
+/* =====================================================
+   IMAGE HOVER
+===================================================== */
+
+.about-intro-image-wrapper:hover
+.about-intro-image {
+  transform:
+    scale(1.05);
+
+  filter:
+    brightness(0.92);
+}
+
+
+/* =====================================================
+   IMAGE OVERLAY
+===================================================== */
+
+.about-intro-image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 8, 8, 0.20),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 8, 8, 0.04),
+      rgba(8, 8, 8, 0.30)
+    );
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.about-intro-stats {
+  width: 88%;
+
+  max-width: 1400px;
+
+  margin:
+    45px
+    auto
+    0;
+
+  padding:
+    28px
+    0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      5,
+      minmax(0, 1fr)
+    );
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.10);
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.10);
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   INDIVIDUAL STAT
+===================================================== */
+
+.about-stat {
+  position: relative;
+
+  min-width: 0;
+
+  padding:
+    5px
+    18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  transition:
+    transform 0.35s ease;
+}
+
+
+/* =====================================================
+   STAT DIVIDER
+===================================================== */
+
+.about-stat:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+
+  top: 15%;
+
+  width: 1px;
+
+  height: 70%;
+
+  background:
+    rgba(255, 255, 255, 0.10);
+}
+
+
+/* =====================================================
+   NUMBER
+===================================================== */
+
+.about-stat-number {
+  display: flex;
+
+  align-items: baseline;
+
+  justify-content: center;
+
+  margin-bottom: 8px;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+}
+
+
+/* =====================================================
+   COUNT
+===================================================== */
+
+.about-stat-number strong {
+  color: #ffffff;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size:
+    clamp(
+      30px,
+      3vw,
+      44px
+    );
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -1.5px;
+
+  transition:
+    color 0.3s ease;
+}
+
+
+/* =====================================================
+   SUFFIX
+===================================================== */
+
+.about-stat-number span {
+  margin-left: 3px;
+
+  color: #1683f7;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size:
+    clamp(
+      18px,
+      1.7vw,
+      25px
+    );
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.about-stat-label {
+  color: #707070;
+
+  font-family:
+    "Manrope",
+    sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   STAT HOVER
+===================================================== */
+
+.about-stat:hover {
+  transform:
+    translateY(-4px);
+}
+
+.about-stat:hover
+.about-stat-number strong {
+  color: #1683f7;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes aboutIntroContentReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+
+}
+
+
+@keyframes aboutIntroImageReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .about-intro-main {
+    width: 92%;
+
+    min-height: 480px;
+
+    grid-template-columns:
+      43%
+      57%;
+  }
+
+  .about-intro-content {
+    padding:
+      55px
+      35px
+      55px
+      0;
+  }
+
+  .about-intro-eyebrow {
+    font-size: 14px;
+  }
+
+  .about-intro-content h1 {
+    font-size:
+      clamp(
+        42px,
+        6vw,
+        62px
+      );
+
+    letter-spacing:
+      -2px;
+  }
+
+  .about-intro-text {
+    font-size: 16px;
+
+    line-height: 1.6;
+  }
+
+  .about-intro-highlight {
+    font-size: 14px;
+  }
+
+  .about-intro-image-wrapper {
+    min-height: 480px;
+  }
+
+  .about-intro-stats {
+    width: 92%;
+
+    margin-top: 40px;
+
+    padding:
+      25px
+      0;
+  }
+
+  .about-stat {
+    padding:
+      5px
+      12px;
+  }
+
+  .about-stat-number strong {
+    font-size: 32px;
+  }
+
+}
+
+
+/* =====================================================
+   MID TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+  .about-intro-main {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    min-height: auto;
+  }
+
+  .about-intro-content {
+    padding:
+      70px
+      0
+      10px;
+  }
+
+  .about-intro-eyebrow {
+    font-size: 13px;
+  }
+
+  .about-intro-content h1 {
+    font-size:
+      clamp(
+        44px,
+        8vw,
+        60px
+      );
+  }
+
+  .about-intro-text {
+    max-width: 600px;
+
+    font-size: 17px;
+  }
+
+  .about-intro-image-wrapper {
+    min-height: 430px;
+
+    height: 430px;
+  }
+
+  .about-intro-stats {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+
+    row-gap: 25px;
+
+    padding:
+      25px
+      0;
+  }
+
+  .about-stat:nth-child(3)::after {
+    display: none;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .about-intro-main {
+    width:
+      calc(100% - 32px);
+
+    min-height: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+  }
+
+  .about-intro-content {
+    order: 1;
+
+    padding:
+      100px
+      0
+      42px;
+  }
+
+  .about-intro-eyebrow {
+    font-size: 11px;
+
+    margin-bottom: 15px;
+
+    letter-spacing:
+      1.5px;
+  }
+
+  .about-intro-content h1 {
+    font-size:
+      clamp(
+        40px,
+        11vw,
+        56px
+      );
+
+    line-height: 1.02;
+
+    letter-spacing:
+      -1.7px;
+  }
+
+  .about-intro-line {
+    margin:
+      18px
+      0
+      18px;
+  }
+
+  .about-intro-text {
+    max-width: 100%;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-bottom: 13px;
+  }
+
+  .about-intro-highlight {
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+  .about-intro-image-wrapper {
+    order: 2;
+
+    width: 100%;
+
+    min-height: 0;
+
+    height: 380px;
+  }
+
+  .about-intro-stats {
+    width:
+      calc(100% - 32px);
+
+    margin:
+      40px
+      auto
+      0;
+
+    padding:
+      24px
+      0;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    row-gap: 25px;
+  }
+
+  .about-stat {
+    padding:
+      5px
+      10px;
+  }
+
+  .about-stat-number strong {
+    font-size: 30px;
+  }
+
+  .about-stat-number span {
+    font-size: 18px;
+  }
+
+  .about-stat-label {
+    font-size: 7px;
+
+    letter-spacing: 1px;
+  }
+
+  .about-stat:not(:last-child)::after {
+    height: 65%;
+
+    top: 17.5%;
+  }
+
+  .about-stat:nth-child(2)::after,
+  .about-stat:nth-child(4)::after {
+    display: none;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .about-intro-main {
+    width:
+      calc(100% - 28px);
+  }
+
+  .about-intro-content {
+    padding-top: 90px;
+  }
+
+  .about-intro-eyebrow {
+    font-size: 10px;
+  }
+
+  .about-intro-content h1 {
+    font-size: 38px;
+
+    letter-spacing:
+      -1.5px;
+  }
+
+  .about-intro-text {
+    font-size: 14px;
+  }
+
+  .about-intro-image-wrapper {
+    height: 320px;
+  }
+
+  .about-intro-stats {
+    width:
+      calc(100% - 28px);
+
+    margin-top: 35px;
+
+    row-gap: 22px;
+  }
+
+  .about-stat-number strong {
+    font-size: 27px;
+  }
+
+  .about-stat-number span {
+    font-size: 16px;
+  }
+
+  .about-stat-label {
+    font-size: 6px;
+
+    letter-spacing:
+      0.9px;
+  }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+
+  .about-intro-content,
+  .about-intro-image-wrapper,
+  .about-intro-image,
+  .about-stat {
+
+    animation: none;
+
+    transition: none;
+  }
+
+}
