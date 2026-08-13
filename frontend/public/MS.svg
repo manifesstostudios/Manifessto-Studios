@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Rounded Black Background -->
+  <rect width="512" height="512" rx="96" fill="#000000" />
+
+  <g transform="skewX(-12) translate(30, 0)">
+    <!-- Cyan Top Accent Block on 'M' -->
+    <polygon points="115,105 155,130 135,175 100,150" fill="#29A9E0" />
+
+    <!-- Stylized Sharp 'M' -->
+    <path d="M 60,400 L 125,230 L 155,255 L 180,205 L 215,280 L 195,320 L 250,245 L 280,400 L 230,400 L 210,310 L 175,360 L 140,310 L 115,400 Z" fill="#FFFFFF" />
+
+    <!-- Matching Sharp Angular 'S' -->
+    <path d="M 310,350 L 350,350 C 390,350 420,335 420,305 C 420,275 390,265 350,255 C 320,248 295,238 295,200 C 295,160 330,140 380,140 L 435,140 L 420,185 L 380,185 C 355,185 340,195 340,208 C 340,222 355,228 385,236 C 425,246 465,260 465,305 C 465,360 415,395 350,395 L 295,395 Z" fill="#FFFFFF" />
+  </g>
+</svg>

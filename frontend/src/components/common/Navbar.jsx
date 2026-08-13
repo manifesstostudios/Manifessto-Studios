@@ -198,7 +198,7 @@ const Navbar = ({ onBookSlot }) => {
           >
 
             <img
-              src="/src/assets/images/logo-white.png"
+              src="https://res.cloudinary.com/cihmo4w9/image/upload/v1786565020/logo-white.png"
               alt="Manifessto Studios"
             />
 

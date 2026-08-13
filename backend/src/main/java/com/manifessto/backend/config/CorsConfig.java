@@ -14,8 +14,11 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration =
-                new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // =========================================
+        // ALLOWED FRONTEND ORIGINS
+        // =========================================
 
         configuration.setAllowedOrigins(
                 List.of(
@@ -24,6 +27,10 @@ public class CorsConfig {
                         "https://www.manifesstostudios.in"
                 )
         );
+
+        // =========================================
+        // ALLOWED METHODS
+        // =========================================
 
         configuration.setAllowedMethods(
                 List.of(
@@ -36,15 +43,31 @@ public class CorsConfig {
                 )
         );
 
+        // =========================================
+        // ALLOWED HEADERS
+        // =========================================
+
         configuration.setAllowedHeaders(
                 List.of("*")
         );
+
+        // =========================================
+        // EXPOSED HEADERS
+        // =========================================
 
         configuration.setExposedHeaders(
                 List.of("Authorization")
         );
 
+        // =========================================
+        // CREDENTIALS
+        // =========================================
+
         configuration.setAllowCredentials(false);
+
+        // =========================================
+        // REGISTER CORS CONFIG
+        // =========================================
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();

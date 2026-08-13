@@ -37,7 +37,7 @@ const Hero = ({ onStartProject }) => {
         playsInline
       >
         <source
-          src="/videos/heromobile.mp4"
+          src="https://res.cloudinary.com/cihmo4w9/video/upload/v1786632513/mobile.home.mp4"
           type="video/mp4"
         />
       </video>
