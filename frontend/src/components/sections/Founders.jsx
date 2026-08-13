@@ -8,7 +8,7 @@ const founders = [
     id: "01",
     role: "FOUNDER",
     name: "Atharva Maind",
-    image: founderImage,
+    image: "https://res.cloudinary.com/cihmo4w9/image/upload/v1786634083/manifessto-studios/sfbspdmklgujbkefo7zo.jpg",
 
     description:
       "Creative and detail-oriented Videographer experienced in producing brand shoots, promotional reels, and wedding content. Skilled in operating professional cameras, camera gimbals, and mobile gimbals to capture smooth, cinematic visuals. Strong understanding of composition, lighting, and visual storytelling to create engaging and high-quality content. Have collaborated with brands such as LG, Yogesh Marketing, My Home Decor, and Hotel Airport Centre Point, delivering impactful videos for digital platforms and social media. Passionate about bringing creative ideas to life through compelling visuals, with the ability to manage shoots from concept to final output while maintaining professional quality and meeting project deadlines ",
@@ -24,7 +24,7 @@ const founders = [
     id: "02",
     role: "CO-FOUNDER",
     name: "Abhishek Kashte",
-    image: cofounderImage,
+    image: "https://res.cloudinary.com/cihmo4w9/image/upload/v1786633984/manifessto-studios/wur8chq7urya4g3sqnei.jpg",
 
     description:
       "Creative Photographer and Videographer with a passion for turning ideas into meaningful visual stories. Skilled in photography, cinematic videography, reel production, composition, lighting, and creative direction, with a focus on creating visuals that feel authentic and intentional. I also bring experience in graphic design, including posters, thumbnails, carousels, banners, branding, and visual creatives. As a co-founder of Manifesto Studio, I combine creativity, visual strategy, and attention to detail to help brands communicate their identity through powerful imagery and storytelling.",
