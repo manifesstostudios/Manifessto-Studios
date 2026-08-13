@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/services")
-@CrossOrigin(origins = "http://localhost:5173")
 public class StudioServiceController {
 
     private final StudioServiceService studioServiceService;

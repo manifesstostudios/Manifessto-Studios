@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/trusted-by")
-@CrossOrigin(origins = "http://localhost:5173")
 public class TrustedBrandController {
 
     private final TrustedBrandService trustedBrandService;

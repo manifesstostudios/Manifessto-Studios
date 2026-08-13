@@ -1,14 +1,11 @@
 package com.manifessto.backend.config;
 
 import com.manifessto.backend.security.JwtAuthenticationFilter;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -30,26 +27,21 @@ public class SecurityConfig {
 
         http
 
-                // =====================================================
+                // ==============================
                 // CORS
-                // =====================================================
+                // ==============================
 
-                .cors(cors -> {
-                })
+                .cors(cors -> {})
 
-
-                // =====================================================
+                // ==============================
                 // CSRF
-                // JWT based REST API
-                // =====================================================
+                // ==============================
 
                 .csrf(csrf -> csrf.disable())
 
-
-                // =====================================================
-                // SESSION MANAGEMENT
-                // JWT = STATELESS
-                // =====================================================
+                // ==============================
+                // SESSION
+                // ==============================
 
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(
@@ -57,133 +49,106 @@ public class SecurityConfig {
                         )
                 )
 
-
-                // =====================================================
+                // ==============================
                 // AUTHORIZATION
-                // =====================================================
+                // ==============================
 
                 .authorizeHttpRequests(auth -> auth
 
-
-                        // =================================================
-                        // CORS PREFLIGHT REQUESTS
-                        // =================================================
+                        // --------------------------------
+                        // CORS PREFLIGHT
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.OPTIONS,
                                 "/**"
                         ).permitAll()
 
-
-                        // =================================================
+                        // --------------------------------
                         // ADMIN LOGIN
-                        // PUBLIC
-                        // =================================================
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/admin/login"
                         ).permitAll()
 
-
-                        // =================================================
-                        // PUBLIC REVIEWS
-                        // =================================================
-
-                        // Anyone can view reviews
-
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/reviews"
-                        ).permitAll()
-
-
-                        // Anyone can submit reviews
-
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/api/reviews"
-                        ).permitAll()
-
-
-                        // =================================================
+                        // --------------------------------
                         // PUBLIC GET APIs
-                        // =================================================
-
-                        // Website ka public content
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/**"
                         ).permitAll()
 
+                        // --------------------------------
+                        // PUBLIC REVIEW SUBMISSION
+                        // --------------------------------
 
-                        // =================================================
-                        // ADMIN ONLY - POST
-                        // =================================================
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/reviews"
+                        ).permitAll()
+
+                        // --------------------------------
+                        // ADMIN CREATE
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-
-                        // =================================================
-                        // ADMIN ONLY - PUT
-                        // =================================================
+                        // --------------------------------
+                        // ADMIN UPDATE
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.PUT,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-
-                        // =================================================
-                        // ADMIN ONLY - PATCH
-                        // =================================================
+                        // --------------------------------
+                        // ADMIN PATCH
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.PATCH,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-
-                        // =================================================
-                        // ADMIN ONLY - DELETE
-                        // =================================================
+                        // --------------------------------
+                        // ADMIN DELETE
+                        // --------------------------------
 
                         .requestMatchers(
                                 HttpMethod.DELETE,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-
-                        // =================================================
+                        // --------------------------------
                         // EVERYTHING ELSE
-                        // =================================================
+                        // --------------------------------
 
                         .anyRequest().permitAll()
                 )
 
-
-                // =====================================================
+                // ==============================
                 // JWT FILTER
-                // =====================================================
+                // ==============================
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 )
 
-
-                // =====================================================
-                // DISABLE DEFAULT AUTHENTICATION
-                // =====================================================
+                // ==============================
+                // DISABLE DEFAULT AUTH
+                // ==============================
 
                 .formLogin(form -> form.disable())
-
                 .httpBasic(basic -> basic.disable());
-
 
         return http.build();
     }

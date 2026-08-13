@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/project-categories")
-@CrossOrigin(origins = "http://localhost:5173")
 public class ProjectCategoryController {
 
     private final ProjectCategoryService projectCategoryService;

@@ -11,9 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/team-members")
-@CrossOrigin(
-        origins = "http://localhost:5173"
-)
+
 public class TeamMemberController {
 
     private final TeamMemberService teamMemberService;

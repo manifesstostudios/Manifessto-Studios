@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/about-stats")
-@CrossOrigin(origins = "http://localhost:5173")
 public class AboutStatController {
 
     private final AboutStatService aboutStatService;
