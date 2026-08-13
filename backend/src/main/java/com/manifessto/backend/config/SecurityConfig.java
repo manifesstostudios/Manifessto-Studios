@@ -1,11 +1,14 @@
 package com.manifessto.backend.config;
 
 import com.manifessto.backend.security.JwtAuthenticationFilter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -31,18 +34,21 @@ public class SecurityConfig {
                 // CORS
                 // =====================================================
 
-                .cors(cors -> {})
+                .cors(cors -> {
+                })
+
 
                 // =====================================================
                 // CSRF
-                // JWT based API hai, isliye CSRF disable
+                // JWT based REST API
                 // =====================================================
 
                 .csrf(csrf -> csrf.disable())
 
+
                 // =====================================================
                 // SESSION MANAGEMENT
-                // JWT authentication ke saath stateless
+                // JWT = STATELESS
                 // =====================================================
 
                 .sessionManagement(session ->
@@ -51,86 +57,117 @@ public class SecurityConfig {
                         )
                 )
 
+
                 // =====================================================
                 // AUTHORIZATION
                 // =====================================================
 
                 .authorizeHttpRequests(auth -> auth
 
-                        // -------------------------------------------------
+
+                        // =================================================
                         // CORS PREFLIGHT REQUESTS
-                        // -------------------------------------------------
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.OPTIONS,
                                 "/**"
                         ).permitAll()
 
-                        // -------------------------------------------------
+
+                        // =================================================
                         // ADMIN LOGIN
-                        // Login ke liye JWT nahi chahiye
-                        // -------------------------------------------------
+                        // PUBLIC
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/admin/login"
                         ).permitAll()
 
-                        // -------------------------------------------------
+
+                        // =================================================
+                        // PUBLIC REVIEWS
+                        // =================================================
+
+                        // Anyone can view reviews
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/reviews"
+                        ).permitAll()
+
+
+                        // Anyone can submit reviews
+
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/reviews"
+                        ).permitAll()
+
+
+                        // =================================================
                         // PUBLIC GET APIs
-                        // Website ke public data ke liye
-                        // -------------------------------------------------
+                        // =================================================
+
+                        // Website ka public content
 
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/**"
                         ).permitAll()
 
-                        // -------------------------------------------------
-                        // ADMIN CREATE APIs
-                        // -------------------------------------------------
+
+                        // =================================================
+                        // ADMIN ONLY - POST
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-                        // -------------------------------------------------
-                        // ADMIN UPDATE APIs
-                        // -------------------------------------------------
+
+                        // =================================================
+                        // ADMIN ONLY - PUT
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.PUT,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-                        // -------------------------------------------------
-                        // ADMIN PARTIAL UPDATE APIs
-                        // -------------------------------------------------
+
+                        // =================================================
+                        // ADMIN ONLY - PATCH
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.PATCH,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-                        // -------------------------------------------------
-                        // ADMIN DELETE APIs
-                        // -------------------------------------------------
+
+                        // =================================================
+                        // ADMIN ONLY - DELETE
+                        // =================================================
 
                         .requestMatchers(
                                 HttpMethod.DELETE,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-                        // -------------------------------------------------
+
+                        // =================================================
                         // EVERYTHING ELSE
-                        // -------------------------------------------------
+                        // =================================================
 
                         .anyRequest().permitAll()
                 )
 
+
                 // =====================================================
-                // JWT AUTHENTICATION FILTER
+                // JWT FILTER
                 // =====================================================
 
                 .addFilterBefore(
@@ -138,12 +175,15 @@ public class SecurityConfig {
                         UsernamePasswordAuthenticationFilter.class
                 )
 
+
                 // =====================================================
-                // DISABLE DEFAULT LOGIN MECHANISMS
+                // DISABLE DEFAULT AUTHENTICATION
                 // =====================================================
 
                 .formLogin(form -> form.disable())
+
                 .httpBasic(basic -> basic.disable());
+
 
         return http.build();
     }
