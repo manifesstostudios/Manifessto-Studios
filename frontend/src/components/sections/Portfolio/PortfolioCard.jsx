@@ -1,6 +1,5 @@
 import "./PortfolioCard.css";
 
-import portfolioCardImage from "../../../assets/images/production.png";
 
 const PortfolioCard = () => {
   return (
@@ -15,7 +14,7 @@ const PortfolioCard = () => {
         <div className="portfolio-card-image-wrapper">
 
           <img
-            src={portfolioCardImage}
+            src="https://res.cloudinary.com/cihmo4w9/image/upload/v1786622512/production.png"
             alt="Manifessto Studios Portfolio"
             className="portfolio-card-image"
           />
