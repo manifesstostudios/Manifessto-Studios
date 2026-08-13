@@ -4,7 +4,7 @@ import "./AboutStatsManagement.css";
 
 
 const API_URL =
-  "http://localhost:8080/api/about-stats";
+  `${import.meta.env.VITE_API_URL}/api/about-stats`;
 
 
 const EMPTY_FORM = {

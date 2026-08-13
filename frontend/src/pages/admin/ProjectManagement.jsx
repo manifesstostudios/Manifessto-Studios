@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import "./ProjectManagement.css";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL;
+
 const PROJECT_API =
-  "http://localhost:8080/api/projects";
+    `${API_BASE_URL}/api/projects`;
 
 const CATEGORY_API =
-  "http://localhost:8080/api/project-categories";
+  `${API_BASE_URL}/api/project-categories`;
 
 const UPLOAD_API_URL =
-  "http://localhost:8080/api/uploads/image";
+  `${API_BASE_URL}/api/uploads/image`;
 
 const EMPTY_PROJECT = {
   title: "",

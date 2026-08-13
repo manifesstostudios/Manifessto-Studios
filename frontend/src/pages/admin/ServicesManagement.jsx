@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import "./ServicesManagement.css";
 
-const API_URL = "http://localhost:8080/api/services";
-const UPLOAD_API_URL = "http://localhost:8080/api/uploads/image";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL;
 
+const API_URL =
+  `${API_BASE_URL}/api/services`;
+
+const UPLOAD_API_URL =
+  `${API_BASE_URL}/api/uploads/image`;
+  
 const EMPTY_FORM = {
   icon: "",
   title: "",

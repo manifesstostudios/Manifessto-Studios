@@ -11,7 +11,9 @@ import AboutStatsManagement from "./AboutStatsManagement";
 import ProjectManagement from "./ProjectManagement";
 import ReviewsManagement from "./ReviewsManagement";
 
-
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL;
+  
 const AdminDashboard = () => {
 
   const navigate = useNavigate();
@@ -59,19 +61,19 @@ const AdminDashboard = () => {
         ] = await Promise.all([
 
           fetch(
-            "http://localhost:8080/api/services"
+            `${API_BASE_URL}/api/services`
           ),
 
           fetch(
-            "http://localhost:8080/api/team-members"
+            `${API_BASE_URL}/api/team-members`
           ),
 
           fetch(
-            "http://localhost:8080/api/projects"
+            `${API_BASE_URL}/api/projects`
           ),
 
           fetch(
-            "http://localhost:8080/api/reviews"
+             `${API_BASE_URL}/api/reviews`
           ),
 
         ]);

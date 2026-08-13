@@ -19,7 +19,7 @@ const Hero = ({ onStartProject }) => {
         playsInline
       >
         <source
-          src="/videos/logovideo.mp4"
+          src="https://res.cloudinary.com/cihmo4w9/video/upload/v1786564871/hero1.mp4"
           type="video/mp4"
         />
       </video>
