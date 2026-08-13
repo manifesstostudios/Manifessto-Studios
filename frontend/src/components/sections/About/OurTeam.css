@@ -1,453 +1,454 @@
+/* ===================================================== 
+   OUR TEAM SECTION 
+===================================================== */ 
+ 
+.our-team { 
+  width: 100%; 
+  padding: 90px 0; 
+  box-sizing: border-box; 
+  overflow: hidden; 
+} 
+ 
+/* ===================================================== 
+   HEADER 
+===================================================== */ 
+ 
+.our-team-header { 
+  width: 88%; 
+  max-width: 1400px; 
+  margin: 0 auto 45px; 
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: space-between; 
+  gap: 30px; 
+  box-sizing: border-box; 
+} 
+ 
+.our-team-header-left { 
+  flex: 1; 
+} 
+ 
+.our-team-eyebrow { 
+  margin: 0 0 12px; 
+  font-size: 13px; 
+  font-weight: 600; 
+  letter-spacing: 2px; 
+  text-transform: uppercase; 
+} 
+ 
+.our-team-title { 
+  margin: 0; 
+  font-size: clamp(36px, 5vw, 72px); 
+  line-height: 0.95; 
+  font-weight: 700; 
+  letter-spacing: -2px; 
+} 
+ 
+.our-team-description { 
+  max-width: 520px; 
+  margin: 0; 
+  font-size: 16px; 
+  line-height: 1.7; 
+} 
+ 
+/* ===================================================== 
+   SLIDER WRAPPER 
+===================================================== */ 
+ 
+.our-team-slider-wrapper { 
+  position: relative; 
+  width: 100%; 
+  box-sizing: border-box; 
+} 
+ 
+/* ===================================================== 
+   TEAM SLIDER 
+===================================================== */ 
+ 
+.our-team-slider { 
+  width: 100%; 
+  display: flex; 
+  gap: 22px; 
+ 
+  overflow-x: auto; 
+  overflow-y: hidden; 
+ 
+  padding: 0 125px 25px 0; 
+ 
+  box-sizing: border-box; 
+ 
+  scroll-behavior: smooth; 
+  scroll-snap-type: x mandatory; 
+ 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+ 
+  /* 
+    Allow normal browser touch handling.
+    This keeps horizontal card scrolling
+    while allowing vertical page scrolling.
+  */ 
+  touch-action: auto; 
+ 
+  -webkit-overflow-scrolling: touch; 
+ 
+  overscroll-behavior-x: contain; 
+ 
+  cursor: grab; 
+} 
+ 
+.our-team-slider::-webkit-scrollbar { 
+  display: none; 
+} 
+ 
+.our-team-slider:active { 
+  cursor: grabbing; 
+} 
+ 
+/* ===================================================== 
+   TEAM CARD 
+===================================================== */ 
+ 
+.our-team-card { 
+  position: relative; 
+ 
+  flex: 0 0 300px; 
+ 
+  width: 300px; 
+  min-width: 300px; 
+ 
+  scroll-snap-align: start; 
+ 
+  box-sizing: border-box; 
+ 
+  user-select: none; 
+  -webkit-user-select: none; 
+} 
+ 
+/* ===================================================== 
+   CARD IMAGE 
+===================================================== */ 
+ 
+.our-team-card-image { 
+  position: relative; 
+ 
+  width: 100%; 
+  height: 380px; 
+ 
+  overflow: hidden; 
+ 
+  border-radius: 18px; 
+ 
+  background: #f2f2f2; 
+ 
+  box-sizing: border-box; 
+} 
+ 
+.our-team-card-image img { 
+  width: 100%; 
+  height: 100%; 
+ 
+  display: block; 
+ 
+  object-fit: cover; 
+ 
+  pointer-events: none; 
+ 
+  user-select: none; 
+  -webkit-user-select: none; 
+ 
+  transition: transform 0.45s ease; 
+} 
+ 
+.our-team-card:hover 
+.our-team-card-image img { 
+  transform: scale(1.04); 
+} 
+ 
+/* ===================================================== 
+   CARD CONTENT 
+===================================================== */ 
+ 
+.our-team-card-content { 
+  padding: 18px 4px 0; 
+  box-sizing: border-box; 
+} 
+ 
+.our-team-card-name { 
+  margin: 0; 
+ 
+  font-size: 21px; 
+  line-height: 1.25; 
+ 
+  font-weight: 600; 
+} 
+ 
+.our-team-card-role { 
+  margin: 7px 0 0; 
+ 
+  font-size: 14px; 
+  line-height: 1.5; 
+ 
+  opacity: 0.7; 
+} 
+ 
+/* ===================================================== 
+   SOCIAL LINKS 
+===================================================== */ 
+ 
+.our-team-card-socials { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+ 
+  margin-top: 14px; 
+} 
+ 
+.our-team-card-socials a { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+ 
+  width: 34px; 
+  height: 34px; 
+ 
+  border-radius: 50%; 
+ 
+  text-decoration: none; 
+ 
+  transition: 
+    transform 0.25s ease, 
+    opacity 0.25s ease; 
+} 
+ 
+.our-team-card-socials a:hover { 
+  transform: translateY(-2px); 
+  opacity: 0.75; 
+} 
+ 
+/* ===================================================== 
+   SLIDER CONTROLS 
+===================================================== */ 
+ 
+.our-team-controls { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+ 
+  flex-shrink: 0; 
+} 
+ 
+.our-team-control-btn { 
+  width: 46px; 
+  height: 46px; 
+ 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+ 
+  border: 1px solid currentColor; 
+  border-radius: 50%; 
+ 
+  background: transparent; 
+ 
+  cursor: pointer; 
+ 
+  transition: 
+    background 0.25s ease, 
+    color 0.25s ease, 
+    transform 0.25s ease; 
+} 
+ 
+.our-team-control-btn:hover { 
+  transform: translateY(-2px); 
+} 
+ 
+/* ===================================================== 
+   TABLET 
+===================================================== */ 
+ 
+@media (max-width: 1000px) { 
+ 
+  .our-team { 
+    padding: 75px 0; 
+  } 
+ 
+  .our-team-header { 
+    width: 90%; 
+    margin-bottom: 35px; 
+  } 
+ 
+  .our-team-card { 
+    flex-basis: 280px; 
+    width: 280px; 
+    min-width: 280px; 
+  } 
+ 
+  .our-team-card-image { 
+    height: 350px; 
+  } 
+ 
+  .our-team-slider { 
+    padding-right: 60px; 
+  } 
+} 
+ 
+/* ===================================================== 
+   MOBILE 
+===================================================== */ 
+ 
+@media (max-width: 800px) { 
+ 
+  .our-team { 
+    padding: 60px 0; 
+    overflow: hidden; 
+  } 
+ 
+  .our-team-header { 
+    width: 90%; 
+    margin-bottom: 30px; 
+ 
+    flex-direction: column; 
+    align-items: flex-start; 
+ 
+    gap: 20px; 
+  } 
+ 
+  .our-team-title { 
+    font-size: clamp(34px, 10vw, 52px); 
+    letter-spacing: -1.5px; 
+  } 
+ 
+  .our-team-description { 
+    font-size: 15px; 
+    line-height: 1.65; 
+  } 
+ 
+  .our-team-controls { 
+    display: none; 
+  } 
+ 
+  /* =================================================
+     MOBILE SLIDER
+  ================================================= */ 
+ 
+  .our-team-slider { 
+    width: 100%; 
+ 
+    overflow-x: auto; 
+    overflow-y: hidden; 
+ 
+    padding-left: 5%; 
+    padding-right: 5%; 
+    padding-bottom: 20px; 
+ 
+    gap: 16px; 
+ 
+    scroll-snap-type: x mandatory; 
+ 
+    /* 
+      IMPORTANT:
+      Do not lock touch movement to horizontal.
+      Browser can now perform normal vertical
+      page scrolling.
+    */ 
+    touch-action: auto; 
+ 
+    -webkit-overflow-scrolling: touch; 
+ 
+    overscroll-behavior-x: contain; 
+  } 
+ 
+  .our-team-card { 
+    flex: 0 0 78vw; 
+ 
+    width: 78vw; 
+    min-width: 78vw; 
+ 
+    max-width: 330px; 
+  } 
+ 
+  .our-team-card-image { 
+    width: 100%; 
+    height: 105vw; 
+ 
+    max-height: 430px; 
+ 
+    border-radius: 16px; 
+  } 
+ 
+  .our-team-card-content { 
+    padding-top: 15px; 
+  } 
+ 
+  .our-team-card-name { 
+    font-size: 19px; 
+  } 
+ 
+  .our-team-card-role { 
+    font-size: 13px; 
+  } 
+} 
+ 
+/* ===================================================== 
+   SMALL MOBILE 
+===================================================== */ 
+ 
+@media (max-width: 480px) { 
+ 
+  .our-team { 
+    padding: 50px 0; 
+  } 
+ 
+  .our-team-header { 
+    width: 90%; 
+  } 
+ 
+  .our-team-eyebrow { 
+    font-size: 11px; 
+    letter-spacing: 1.6px; 
+  } 
+ 
+  .our-team-card { 
+    flex-basis: 82vw; 
+    width: 82vw; 
+    min-width: 82vw; 
+  } 
+ 
+  .our-team-card-image { 
+    height: 108vw; 
+    max-height: 400px; 
+  } 
+ 
+  .our-team-slider { 
+    padding-left: 5%; 
+    padding-right: 5%; 
+  } 
+} 
+ 
+/* ===================================================== 
+   VERY SMALL DEVICES 
+===================================================== */ 
+ 
+@media (max-width: 360px) { 
+ 
+  .our-team-card { 
+    flex-basis: 85vw; 
+    width: 85vw; 
+    min-width: 85vw; 
+  } 
+ 
+  .our-team-card-image { 
+    height: 110vw; 
+  } 
+} 
+ 
 /* =====================================================
-   OUR TEAM SECTION
+   GLOBAL MOBILE VERTICAL SCROLL SAFETY
 ===================================================== */
 
-.our-team {
-  width: 100%;
-  padding: 90px 0;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.our-team-header {
-  width: 88%;
-  max-width: 1400px;
-  margin: 0 auto 45px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 30px;
-  box-sizing: border-box;
-}
-
-.our-team-header-left {
-  flex: 1;
-}
-
-.our-team-eyebrow {
-  margin: 0 0 12px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.our-team-title {
-  margin: 0;
-  font-size: clamp(36px, 5vw, 72px);
-  line-height: 0.95;
-  font-weight: 700;
-  letter-spacing: -2px;
-}
-
-.our-team-description {
-  max-width: 520px;
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-/* =====================================================
-   SLIDER WRAPPER
-===================================================== */
-
-.our-team-slider-wrapper {
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* =====================================================
-   TEAM SLIDER
-===================================================== */
-
-.our-team-slider {
-  width: 100%;
-  display: flex;
-  gap: 22px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  padding: 0 125px 25px 0;
-
-  box-sizing: border-box;
-
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  /*
-    IMPORTANT:
-    Allow horizontal card swipe AND
-    vertical page scrolling on touch devices.
-  */
-  touch-action: pan-x pan-y;
-
-  -webkit-overflow-scrolling: touch;
-
-  overscroll-behavior-x: contain;
-
-  cursor: grab;
-}
-
-.our-team-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.our-team-slider:active {
-  cursor: grabbing;
-}
-
-/* =====================================================
-   TEAM CARD
-===================================================== */
-
-.our-team-card {
-  position: relative;
-
-  flex: 0 0 300px;
-
-  width: 300px;
-  min-width: 300px;
-
-  scroll-snap-align: start;
-
-  box-sizing: border-box;
-
-  user-select: none;
-  -webkit-user-select: none;
-
-  /*
-    Do not block vertical scrolling.
-  */
-  touch-action: pan-x pan-y;
-}
-
-/* =====================================================
-   CARD IMAGE
-===================================================== */
-
-.our-team-card-image {
-  position: relative;
-
-  width: 100%;
-  height: 380px;
-
-  overflow: hidden;
-
-  border-radius: 18px;
-
-  background: #f2f2f2;
-
-  box-sizing: border-box;
-}
-
-.our-team-card-image img {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  pointer-events: none;
-
-  user-select: none;
-  -webkit-user-select: none;
-
-  transition: transform 0.45s ease;
-}
-
-.our-team-card:hover
-.our-team-card-image img {
-  transform: scale(1.04);
-}
-
-/* =====================================================
-   CARD CONTENT
-===================================================== */
-
-.our-team-card-content {
-  padding: 18px 4px 0;
-  box-sizing: border-box;
-}
-
-.our-team-card-name {
-  margin: 0;
-
-  font-size: 21px;
-  line-height: 1.25;
-
-  font-weight: 600;
-}
-
-.our-team-card-role {
-  margin: 7px 0 0;
-
-  font-size: 14px;
-  line-height: 1.5;
-
-  opacity: 0.7;
-}
-
-/* =====================================================
-   SOCIAL LINKS
-===================================================== */
-
-.our-team-card-socials {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  margin-top: 14px;
-}
-
-.our-team-card-socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 34px;
-  height: 34px;
-
-  border-radius: 50%;
-
-  text-decoration: none;
-
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-}
-
-.our-team-card-socials a:hover {
-  transform: translateY(-2px);
-  opacity: 0.75;
-}
-
-/* =====================================================
-   SLIDER CONTROLS
-===================================================== */
-
-.our-team-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  flex-shrink: 0;
-}
-
-.our-team-control-btn {
-  width: 46px;
-  height: 46px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid currentColor;
-  border-radius: 50%;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
-}
-
-.our-team-control-btn:hover {
-  transform: translateY(-2px);
-}
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 1000px) {
-
-  .our-team {
-    padding: 75px 0;
-  }
-
-  .our-team-header {
-    width: 90%;
-    margin-bottom: 35px;
-  }
-
-  .our-team-card {
-    flex-basis: 280px;
-    width: 280px;
-    min-width: 280px;
-  }
-
-  .our-team-card-image {
-    height: 350px;
-  }
-
-  .our-team-slider {
-    padding-right: 60px;
-  }
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 800px) {
-
-  .our-team {
-    padding: 60px 0;
-    overflow: hidden;
-  }
-
-  .our-team-header {
-    width: 90%;
-    margin-bottom: 30px;
-
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 20px;
-  }
-
-  .our-team-title {
-    font-size: clamp(34px, 10vw, 52px);
-    letter-spacing: -1.5px;
-  }
-
-  .our-team-description {
-    font-size: 15px;
-    line-height: 1.65;
-  }
-
-  .our-team-controls {
-    display: none;
-  }
-
-  /*
-    IMPORTANT MOBILE FIX
-
-    Keep horizontal swipe for cards,
-    but DON'T disable vertical page scrolling.
-  */
-  .our-team-slider {
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 20px;
-
-    gap: 16px;
-
-    scroll-snap-type: x mandatory;
-
-    /*
-      This is the important fix.
-    */
-    touch-action: pan-x pan-y;
-
-    -webkit-overflow-scrolling: touch;
-
-    overscroll-behavior-x: contain;
-  }
-
-  .our-team-card {
-    flex: 0 0 78vw;
-
-    width: 78vw;
-    min-width: 78vw;
-
-    max-width: 330px;
-
-    /*
-      Allow browser to determine vertical gestures.
-    */
-    touch-action: pan-x pan-y;
-  }
-
-  .our-team-card-image {
-    width: 100%;
-    height: 105vw;
-
-    max-height: 430px;
-
-    border-radius: 16px;
-  }
-
-  .our-team-card-content {
-    padding-top: 15px;
-  }
-
-  .our-team-card-name {
-    font-size: 19px;
-  }
-
-  .our-team-card-role {
-    font-size: 13px;
-  }
-}
-
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
-
-@media (max-width: 480px) {
-
-  .our-team {
-    padding: 50px 0;
-  }
-
-  .our-team-header {
-    width: 90%;
-  }
-
-  .our-team-eyebrow {
-    font-size: 11px;
-    letter-spacing: 1.6px;
-  }
-
-  .our-team-card {
-    flex-basis: 82vw;
-    width: 82vw;
-    min-width: 82vw;
-  }
-
-  .our-team-card-image {
-    height: 108vw;
-    max-height: 400px;
-  }
-
-  .our-team-slider {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-
-/* =====================================================
-   VERY SMALL DEVICES
-===================================================== */
-
-@media (max-width: 360px) {
-
-  .our-team-card {
-    flex-basis: 85vw;
-    width: 85vw;
-    min-width: 85vw;
-  }
-
-  .our-team-card-image {
-    height: 110vw;
-  }
+html,
+body {
+  overflow-y: auto;
+  touch-action: auto;
 }
