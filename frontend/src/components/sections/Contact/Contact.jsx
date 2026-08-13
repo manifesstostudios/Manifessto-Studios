@@ -1,6 +1,5 @@
 import "./Contact.css";
 
-
 const Contact = () => {
 
   return (
@@ -83,12 +82,42 @@ const Contact = () => {
               PHONE
             </p>
 
-            <a
-              href="tel:+917888156307"
-              aria-label="Call Manifessto Studios"
-            >
-              +91 78881 56307
-            </a>
+            <div className="contact-phone-list">
+
+              {/* ATHARVA MAIND */}
+
+              <a
+                href="tel:+917888156307"
+                className="contact-item-value contact-phone-link"
+                aria-label="Call Atharva Maind"
+              >
+                <span className="contact-person-name">
+                  Atharva Maind
+                </span>
+
+                <span className="contact-phone-number">
+                  +91 78881 56307
+                </span>
+              </a>
+
+
+              {/* ABHISHEK KASHTE */}
+
+              <a
+                href="tel:+919067756648"
+                className="contact-item-value contact-phone-link"
+                aria-label="Call Abhishek Kashte"
+              >
+                <span className="contact-person-name">
+                  Abhishek Kashte
+                </span>
+
+                <span className="contact-phone-number">
+                  +91 90677 56648
+                </span>
+              </a>
+
+            </div>
 
           </div>
 
@@ -170,8 +199,6 @@ const Contact = () => {
             create something meaningful together.
           </p>
 
-
-
         </div>
 
       </section>
@@ -179,6 +206,5 @@ const Contact = () => {
     </main>
   );
 };
-
 
 export default Contact;
