@@ -8,24 +8,15 @@ import api from "../../../services/api";
 
 import "./OurTeam.css";
 
-
 const OurTeam = () => {
 
-  const teamSliderRef =
-    useRef(null);
+  const teamSliderRef = useRef(null);
 
-  const [teamMembers, setTeamMembers] =
-    useState([]);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const [isDragging, setIsDragging] =
-    useState(false);
-
-  const dragStartX =
-    useRef(0);
-
-  const dragStartScrollLeft =
-    useRef(0);
-
+  const dragStartX = useRef(0);
+  const dragStartScrollLeft = useRef(0);
 
   // =====================================================
   // PARSE SOCIAL LINKS
@@ -42,9 +33,7 @@ const OurTeam = () => {
       try {
 
         const parsed =
-          JSON.parse(
-            member.socialLinks
-          );
+          JSON.parse(member.socialLinks);
 
         if (
           Array.isArray(parsed)
@@ -76,7 +65,6 @@ const OurTeam = () => {
       }
     }
 
-
     /*
      * OLD INSTAGRAM / LINKEDIN
      *
@@ -85,7 +73,6 @@ const OurTeam = () => {
      */
 
     const oldLinks = [];
-
 
     if (member.instagram) {
 
@@ -96,7 +83,6 @@ const OurTeam = () => {
 
     }
 
-
     if (member.linkedin) {
 
       oldLinks.push({
@@ -105,7 +91,6 @@ const OurTeam = () => {
       });
 
     }
-
 
     return oldLinks;
   };
@@ -170,7 +155,6 @@ const OurTeam = () => {
               "/team-members"
             );
 
-
           const data =
             Array.isArray(
               response.data
@@ -178,14 +162,12 @@ const OurTeam = () => {
               ? response.data
               : [];
 
-
           const sortedMembers =
             [...data].sort(
               (a, b) =>
                 (a.displayOrder ?? 0) -
                 (b.displayOrder ?? 0)
             );
-
 
           setTeamMembers(
             sortedMembers
@@ -204,7 +186,6 @@ const OurTeam = () => {
 
       };
 
-
     fetchTeamMembers();
 
   }, []);
@@ -220,28 +201,22 @@ const OurTeam = () => {
       return;
     }
 
-
     const slider =
       teamSliderRef.current;
-
 
     const cards =
       slider.querySelectorAll(
         ".public-team-card"
       );
 
-
     if (!cards.length) {
       return;
     }
 
-
     const currentScroll =
       slider.scrollLeft;
 
-
     let nextCard = null;
-
 
     for (
       const card of cards
@@ -257,7 +232,6 @@ const OurTeam = () => {
         break;
       }
     }
-
 
     if (nextCard) {
 
@@ -292,10 +266,16 @@ const OurTeam = () => {
       return;
     }
 
-
     const slider =
       teamSliderRef.current;
 
+    /*
+     * Only convert vertical mouse-wheel
+     * movement into horizontal card movement.
+     *
+     * This is desktop mouse behavior.
+     * It does NOT handle mobile touch.
+     */
 
     if (
       Math.abs(event.deltaY) >
@@ -303,7 +283,6 @@ const OurTeam = () => {
     ) {
 
       event.preventDefault();
-
 
       slider.scrollLeft +=
         event.deltaY * 1.2;
@@ -327,17 +306,13 @@ const OurTeam = () => {
       return;
     }
 
-
     const slider =
       teamSliderRef.current;
 
-
     setIsDragging(true);
-
 
     dragStartX.current =
       event.pageX;
-
 
     dragStartScrollLeft.current =
       slider.scrollLeft;
@@ -354,20 +329,16 @@ const OurTeam = () => {
       return;
     }
 
-
     if (!teamSliderRef.current) {
       return;
     }
 
-
     const slider =
       teamSliderRef.current;
-
 
     const distance =
       event.pageX -
       dragStartX.current;
-
 
     slider.scrollLeft =
       dragStartScrollLeft.current -
@@ -625,6 +596,5 @@ const OurTeam = () => {
     </section>
   );
 };
-
 
 export default OurTeam;
