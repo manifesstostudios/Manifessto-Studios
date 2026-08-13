@@ -208,7 +208,7 @@ const AboutIntro = () => {
 
 
           <img
-            src="/src/assets/images/logo-white.png"
+            src="https://res.cloudinary.com/cihmo4w9/image/upload/v1786542943/manifessto-studios/svsgeyoifpcj75vvv22t.png"
             alt="Manifessto Studios production"
             className="about-intro-image"
           />
