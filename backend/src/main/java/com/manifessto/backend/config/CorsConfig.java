@@ -14,14 +14,23 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration =
-                new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // =========================================
+        // ALLOWED FRONTEND ORIGINS
+        // =========================================
 
         configuration.setAllowedOrigins(
                 List.of(
-                        "http://localhost:5173"
+                        "http://localhost:5173",
+                        "https://manifesstostudios.in",
+                        "https://www.manifesstostudios.in"
                 )
         );
+
+        // =========================================
+        // ALLOWED METHODS
+        // =========================================
 
         configuration.setAllowedMethods(
                 List.of(
@@ -34,19 +43,31 @@ public class CorsConfig {
                 )
         );
 
+        // =========================================
+        // ALLOWED HEADERS
+        // =========================================
+
         configuration.setAllowedHeaders(
-                List.of(
-                        "*"
-                )
+                List.of("*")
         );
+
+        // =========================================
+        // EXPOSED HEADERS
+        // =========================================
 
         configuration.setExposedHeaders(
-                List.of(
-                        "Authorization"
-                )
+                List.of("Authorization")
         );
 
+        // =========================================
+        // CREDENTIALS
+        // =========================================
+
         configuration.setAllowCredentials(false);
+
+        // =========================================
+        // REGISTER CORS CONFIG
+        // =========================================
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();

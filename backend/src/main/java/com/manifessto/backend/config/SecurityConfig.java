@@ -17,8 +17,7 @@ public class SecurityConfig {
     public SecurityConfig(
             JwtAuthenticationFilter jwtAuthenticationFilter
     ) {
-        this.jwtAuthenticationFilter =
-                jwtAuthenticationFilter;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
@@ -28,21 +27,23 @@ public class SecurityConfig {
 
         http
 
-                // =========================================
+                // =====================================================
                 // CORS
-                // =========================================
+                // =====================================================
 
                 .cors(cors -> {})
 
-                // =========================================
+                // =====================================================
                 // CSRF
-                // =========================================
+                // JWT based API hai, isliye CSRF disable
+                // =====================================================
 
                 .csrf(csrf -> csrf.disable())
 
-                // =========================================
-                // SESSION
-                // =========================================
+                // =====================================================
+                // SESSION MANAGEMENT
+                // JWT authentication ke saath stateless
+                // =====================================================
 
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(
@@ -50,77 +51,99 @@ public class SecurityConfig {
                         )
                 )
 
-                // =========================================
+                // =====================================================
                 // AUTHORIZATION
-                // =========================================
+                // =====================================================
 
                 .authorizeHttpRequests(auth -> auth
 
-                        // ---------------------------------
-                        // CORS PREFLIGHT
-                        // ---------------------------------
+                        // -------------------------------------------------
+                        // CORS PREFLIGHT REQUESTS
+                        // -------------------------------------------------
 
                         .requestMatchers(
                                 HttpMethod.OPTIONS,
                                 "/**"
                         ).permitAll()
 
-                        // ---------------------------------
+                        // -------------------------------------------------
                         // ADMIN LOGIN
-                        // ---------------------------------
+                        // Login ke liye JWT nahi chahiye
+                        // -------------------------------------------------
 
                         .requestMatchers(
+                                HttpMethod.POST,
                                 "/api/admin/login"
                         ).permitAll()
 
-                        // ---------------------------------
+                        // -------------------------------------------------
                         // PUBLIC GET APIs
-                        // ---------------------------------
+                        // Website ke public data ke liye
+                        // -------------------------------------------------
 
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/**"
                         ).permitAll()
 
-                        // ---------------------------------
-                        // ADMIN WRITE APIs
-                        // ---------------------------------
+                        // -------------------------------------------------
+                        // ADMIN CREATE APIs
+                        // -------------------------------------------------
 
                         .requestMatchers(
                                 HttpMethod.POST,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
+                        // -------------------------------------------------
+                        // ADMIN UPDATE APIs
+                        // -------------------------------------------------
+
                         .requestMatchers(
                                 HttpMethod.PUT,
                                 "/api/**"
                         ).hasRole("ADMIN")
+
+                        // -------------------------------------------------
+                        // ADMIN PARTIAL UPDATE APIs
+                        // -------------------------------------------------
 
                         .requestMatchers(
                                 HttpMethod.PATCH,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
+                        // -------------------------------------------------
+                        // ADMIN DELETE APIs
+                        // -------------------------------------------------
+
                         .requestMatchers(
                                 HttpMethod.DELETE,
                                 "/api/**"
                         ).hasRole("ADMIN")
 
-                        // ---------------------------------
+                        // -------------------------------------------------
                         // EVERYTHING ELSE
-                        // ---------------------------------
+                        // -------------------------------------------------
 
                         .anyRequest().permitAll()
                 )
 
-                // =========================================
-                // JWT FILTER
-                // =========================================
+                // =====================================================
+                // JWT AUTHENTICATION FILTER
+                // =====================================================
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
-                );
+                )
+
+                // =====================================================
+                // DISABLE DEFAULT LOGIN MECHANISMS
+                // =====================================================
+
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable());
 
         return http.build();
     }
