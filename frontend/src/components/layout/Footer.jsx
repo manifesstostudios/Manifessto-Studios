@@ -183,7 +183,7 @@ const Footer = ({ onStartProject }) => {
 
         <div className="footer-socials">
           <a
-            href="https://www.instagram.com/manifesstostudios/"
+            href="https://www.instagram.com/manifessto_studios?igsh=MTlja2MybWF1NzI1ZA==&igsi=MTlja2MybWF1NzI1ZA=="
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
