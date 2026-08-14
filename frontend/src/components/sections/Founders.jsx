@@ -15,7 +15,7 @@ const founders = [
 
     position: "Founder • Manifessto Studios",
 
-    skills: ["Photography", "Direction", "Creative Strategy"],
+    skills: ["Videography", "Direction", "Creative Strategy"],
 
     reverse: false,
   },
@@ -31,7 +31,7 @@ const founders = [
 
     position: "Co-Founder • Manifessto Studios",
 
-    skills: ["Videography", "Editing", "Brand Storytelling"],
+    skills: ["Photography", "Editing", "Brand Storytelling"],
 
     reverse: true,
   },

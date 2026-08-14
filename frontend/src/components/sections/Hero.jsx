@@ -70,9 +70,9 @@ const Hero = ({ onStartProject }) => {
 
 
         <p className="hero-description">
-          Photography, videography and content creation
+          Photography, videography and content creation 
           <br />
-          that helps your brand stand out and connect
+          that helps your brand stand out and connect 
           <br />
           deeply with your audience.
         </p>

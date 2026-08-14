@@ -9,6 +9,8 @@ import Contact from "./components/sections/Contact/Contact";
 import SiteLayout from "./components/layout/SiteLayout";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import Terms from "./pages/Terms/Terms";
 
 
 function AppRoutes() {
@@ -35,7 +37,22 @@ function AppRoutes() {
           </SiteLayout>
         }
       />
-
+      <Route
+        path="/privacy"
+        element={
+          <SiteLayout>
+            <PrivacyPolicy />
+          </SiteLayout>
+        }
+      />
+      <Route
+        path="/terms"
+        element={
+          <SiteLayout>
+            <Terms />
+          </SiteLayout>
+        }
+      />
 
       {/* =========================
           ABOUT

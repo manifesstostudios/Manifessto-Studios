@@ -1,4 +1,5 @@
-import { useState, cloneElement } from "react";
+import { useState, cloneElement, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import Navbar from "../common/Navbar";
 import Footer from "./Footer";
@@ -9,11 +10,36 @@ const SiteLayout = ({ children }) => {
 
   const [inquiryOpen, setInquiryOpen] = useState(false);
 
+  const location = useLocation();
+
+
+  // =====================================================
+  // SCROLL TO TOP WHEN ROUTE CHANGES
+  // =====================================================
+
+  useEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+
+  }, [location.pathname]);
+
+
+  // =====================================================
+  // OPEN PROJECT INQUIRY
+  // =====================================================
 
   const openInquiry = () => {
     setInquiryOpen(true);
   };
 
+
+  // =====================================================
+  // CLOSE PROJECT INQUIRY
+  // =====================================================
 
   const closeInquiry = () => {
     setInquiryOpen(false);
@@ -22,6 +48,7 @@ const SiteLayout = ({ children }) => {
 
   return (
     <>
+
       {/* =========================
           NAVBAR
       ========================= */}
@@ -57,6 +84,7 @@ const SiteLayout = ({ children }) => {
         isOpen={inquiryOpen}
         onClose={closeInquiry}
       />
+
     </>
   );
 };

@@ -14,10 +14,6 @@ function App({ onStartProject }) {
   return (
     <MainContainer>
 
-      {/* =========================
-          HERO
-      ========================= */}
-
       <div className="hero-wrapper">
 
         <Hero
@@ -25,11 +21,6 @@ function App({ onStartProject }) {
         />
 
       </div>
-
-
-      {/* =========================
-          HOME SECTIONS
-      ========================= */}
 
       <TrustedBy />
 
@@ -41,11 +32,6 @@ function App({ onStartProject }) {
 
       <Reviews />
 
-
-      {/* =========================
-          CTA
-      ========================= */}
-
       <CTASection
         onStartProject={onStartProject}
       />
@@ -53,6 +39,5 @@ function App({ onStartProject }) {
     </MainContainer>
   );
 }
-
 
 export default App;

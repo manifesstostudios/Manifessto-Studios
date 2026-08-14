@@ -181,37 +181,16 @@ const Footer = ({ onStartProject }) => {
               SOCIALS
           ========================= */}
 
-          <div className="footer-socials">
-
-            <a
-              href="#"
-              aria-label="Instagram"
-            >
-              IG
-            </a>
-
-            <a
-              href="#"
-              aria-label="YouTube"
-            >
-              YT
-            </a>
-
-            <a
-              href="#"
-              aria-label="LinkedIn"
-            >
-              IN
-            </a>
-
-            <a
-              href="#"
-              aria-label="Facebook"
-            >
-              FB
-            </a>
-
-          </div>
+        <div className="footer-socials">
+          <a
+            href="https://www.instagram.com/manifesstostudios/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            Instagram
+          </a>
+        </div>
 
         </div>
 
