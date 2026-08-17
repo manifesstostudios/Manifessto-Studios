@@ -1,11 +1,8 @@
 import "./Hero.css";
 
-
 const Hero = ({ onStartProject }) => {
-
   return (
     <section className="hero">
-
 
       {/* =========================
           DESKTOP / LANDSCAPE VIDEO
@@ -56,7 +53,6 @@ const Hero = ({ onStartProject }) => {
 
       <div className="hero-content">
 
-
         <p className="hero-eyebrow">
           WE CREATE
         </p>
@@ -70,9 +66,9 @@ const Hero = ({ onStartProject }) => {
 
 
         <p className="hero-description">
-          Photography, videography and content creation 
+          Photography, videography and content creation
           <br />
-          that helps your brand stand out and connect 
+          that helps your brand stand out and connect
           <br />
           deeply with your audience.
         </p>
@@ -83,7 +79,6 @@ const Hero = ({ onStartProject }) => {
         ========================= */}
 
         <div className="hero-buttons">
-
 
           {/* VIEW OUR WORK */}
 
@@ -117,7 +112,6 @@ const Hero = ({ onStartProject }) => {
             </span>
           </button>
 
-
         </div>
 
       </div>
@@ -135,10 +129,8 @@ const Hero = ({ onStartProject }) => {
 
       </div>
 
-
     </section>
   );
 };
-
 
 export default Hero;

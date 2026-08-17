@@ -18,6 +18,7 @@
   overflow: hidden;
 }
 
+
 /* =========================
    VIDEO
 ========================= */
@@ -49,6 +50,7 @@
   display: none;
 }
 
+
 /* =========================
    OVERLAY
 ========================= */
@@ -69,6 +71,7 @@
       rgba(0, 0, 0, 0.48) 100%
     );
 }
+
 
 /* =========================
    CONTENT
@@ -94,6 +97,7 @@
     0.35s
     both;
 }
+
 
 /* =========================
    EYEBROW
@@ -123,6 +127,7 @@
     0.55s
     both;
 }
+
 
 /* =========================
    HEADING
@@ -160,6 +165,7 @@
     both;
 }
 
+
 /* =========================
    DESCRIPTION
 ========================= */
@@ -192,6 +198,7 @@
     0.85s
     both;
 }
+
 
 /* =========================
    BUTTONS
@@ -248,6 +255,7 @@
     box-shadow 0.3s ease;
 }
 
+
 /* =========================
    PRIMARY
 ========================= */
@@ -267,6 +275,7 @@
     0 10px 30px
     rgba(22, 131, 247, 0.25);
 }
+
 
 /* =========================
    SECONDARY
@@ -294,6 +303,7 @@
   border-color: #ffffff;
 }
 
+
 /* =========================
    ARROW
 ========================= */
@@ -310,6 +320,7 @@
 .hero-secondary-btn:hover span:last-child {
   transform: translateX(5px);
 }
+
 
 /* =========================
    SHOWREEL
@@ -379,6 +390,7 @@
     infinite;
 }
 
+
 /* =========================
    SCROLL
 ========================= */
@@ -421,6 +433,7 @@
   }
 }
 
+
 /* =========================
    ANIMATIONS
 ========================= */
@@ -428,48 +441,64 @@
 @keyframes heroVideoReveal {
   from {
     opacity: 0;
-    transform: scale(1.06);
+
+    transform:
+      scale(1.06);
   }
 
   to {
     opacity: 1;
-    transform: scale(1);
+
+    transform:
+      scale(1);
   }
 }
 
 @keyframes heroContentReveal {
   from {
     opacity: 0;
-    transform: translateY(35px);
+
+    transform:
+      translateY(35px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
 
 @keyframes heroTextReveal {
   from {
     opacity: 0;
-    transform: translateY(22px);
+
+    transform:
+      translateY(22px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
 
 @keyframes showreelReveal {
   from {
     opacity: 0;
-    transform: translateY(15px);
+
+    transform:
+      translateY(15px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
 
@@ -488,11 +517,13 @@
   }
 }
 
+
 /* =========================
    TABLET
 ========================= */
 
 @media (max-width: 900px) {
+
   .hero-content {
     width: 90%;
 
@@ -515,11 +546,13 @@
   }
 }
 
+
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 700px) {
+
   .hero {
     height: 100vh;
 
@@ -528,6 +561,11 @@
     align-items: flex-end;
   }
 
+
+  /* =========================
+     MOBILE VIDEO
+  ========================= */
+
   .hero-video-desktop {
     display: none;
   }
@@ -535,6 +573,11 @@
   .hero-video-mobile {
     display: block;
   }
+
+
+  /* =========================
+     MOBILE OVERLAY
+  ========================= */
 
   .hero-overlay {
     background:
@@ -545,6 +588,11 @@
         rgba(0, 0, 0, 0.9) 100%
       );
   }
+
+
+  /* =========================
+     MOBILE CONTENT
+  ========================= */
 
   .hero-content {
     width: 100%;
@@ -559,6 +607,11 @@
       90px;
   }
 
+
+  /* =========================
+     MOBILE EYEBROW
+  ========================= */
+
   .hero-eyebrow {
     font-size: 11px;
 
@@ -567,28 +620,65 @@
     letter-spacing: 1.5px;
   }
 
+
+  /* =========================
+     MOBILE HEADING
+  ========================= */
+
   .hero-content h1 {
     font-size:
       clamp(40px, 11vw, 58px);
 
-    line-height: 1.05;
+    line-height: 1.08;
 
     letter-spacing: -1.5px;
   }
 
-  .hero-description {
-    max-width: 100%;
 
-    margin-top: 20px;
+  /* =========================
+     MOBILE DESCRIPTION
+  ========================= */
+
+  .hero-description {
+    width: 100%;
+
+    max-width: 340px;
+
+    margin-top: 22px;
+
+    color: #d0d0d0;
 
     font-size: 14px;
 
-    line-height: 1.55;
+    line-height: 1.75;
+
+    letter-spacing: 0;
+
+    word-break: normal;
+
+    overflow-wrap: normal;
+
+    hyphens: none;
   }
 
+
+  /* =========================
+     IMPORTANT:
+     KEEP DESCRIPTION BREAKS
+  ========================= */
+
   .hero-description br {
-    display: none;
+    display: block;
+
+    content: "";
+
+    margin-bottom: 2px;
   }
+
+
+  /* =========================
+     MOBILE BUTTONS
+  ========================= */
 
   .hero-buttons {
     margin-top: 28px;
@@ -605,29 +695,64 @@
     font-size: 11px;
   }
 
+
+  /* =========================
+     HIDE SHOWREEL
+  ========================= */
+
   .showreel-btn {
     display: none;
   }
+
+
+  /* =========================
+     MOBILE SCROLL
+  ========================= */
 
   .hero-scroll {
     bottom: 20px;
   }
 }
 
+
 /* =========================
    SMALL MOBILE
 ========================= */
 
 @media (max-width: 400px) {
+
   .hero-content {
     padding-left: 16px;
+
     padding-right: 16px;
+
+    padding-bottom: 85px;
   }
+
+
+  /* =========================
+     SMALL MOBILE DESCRIPTION
+  ========================= */
+
+  .hero-description {
+    max-width: 310px;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+
+  /* =========================
+     SMALL MOBILE BUTTONS
+  ========================= */
 
   .hero-buttons {
     flex-direction: column;
 
     align-items: stretch;
+
+    gap: 10px;
   }
 
   .hero-primary-btn,
@@ -636,11 +761,13 @@
   }
 }
 
+
 /* =========================
    REDUCED MOTION
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .hero-video,
   .hero-content,
   .hero-eyebrow,
